@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DigitalHelper Portfolio</title>
+<meta name="description" content="Websites, online store setup, Excel and Google Sheets, and hosting for small businesses in Malaysia. DM for a quote.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=DM+Sans:wght@400;500;700&display=swap">
+<style>
+:root{
+  --bg:#F4F8FF; --ink:#0B1F3A; --muted:#34455F; --blue:#2563EB; --blue-soft:#E3ECFF;
+  --line:#D3E0F5; --card:#FFFFFF; --navy:#0B1F3A; --green:#16A34A; --amber:#D97706; --red:#DC2626;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:'DM Sans',system-ui,-apple-system,Segoe UI,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:'Outfit',system-ui,sans-serif;margin:0;line-height:1.1}
+p{margin:0}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+section{padding:56px 0 8px}
+
+/* nav */
+.nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:20px 0}
+.brand{background:var(--blue);color:#fff;font-weight:700;letter-spacing:3px;font-size:14px;padding:10px 20px;border-radius:999px;white-space:nowrap}
+.btn{display:inline-block;background:var(--blue);color:#fff;text-decoration:none;font-weight:700;padding:12px 24px;border-radius:999px;border:2px solid var(--blue);transition:transform .15s ease,background .15s ease}
+.btn:hover{transform:translateY(-1px);background:#1D4ED8;border-color:#1D4ED8}
+.btn.ghost{background:transparent;color:var(--blue)}
+.btn.ghost:hover{background:var(--blue-soft)}
+.btn:focus-visible,a:focus-visible{outline:3px solid #93C5FD;outline-offset:2px}
+
+/* hero */
+.hero{padding:40px 0 16px}
+.hero h1{font-size:clamp(40px,8vw,84px);font-weight:800;letter-spacing:-1px;max-width:14ch}
+.hero h1 span{color:var(--blue)}
+.hero p{font-size:clamp(17px,2.4vw,22px);color:var(--muted);max-width:42ch;margin-top:18px}
+.hero .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+
+/* headings */
+.eyebrow{font-weight:700;letter-spacing:3px;font-size:13px;color:var(--blue);text-transform:uppercase;margin-bottom:10px}
+h2{font-size:clamp(28px,4.5vw,42px);font-weight:800}
+.lead{color:var(--muted);margin-top:10px;max-width:60ch}
+
+/* services */
+.services{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:26px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px}
+.svc{padding:22px}
+.svc .ico{width:42px;height:42px;border-radius:12px;background:var(--blue-soft);display:grid;place-items:center;margin-bottom:14px}
+.svc .ico svg{width:22px;height:22px;stroke:var(--blue);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.svc h3{font-size:20px;margin-bottom:8px}
+.svc p{color:var(--muted);font-size:15px}
+
+/* projects */
+.grid6{display:grid;grid-template-columns:repeat(6,1fr);gap:18px;margin-top:26px}
+.grid6>.project{grid-column:span 2}
+.grid6.samples>.project:nth-child(n+4){grid-column:span 3}
+.project{overflow:hidden;display:flex;flex-direction:column}
+.shot{background:linear-gradient(180deg,#EAF1FF,#F4F8FF);padding:16px;border-bottom:1px solid var(--line)}
+.project .body{padding:20px 20px 22px;display:flex;flex-direction:column;gap:10px;flex:1}
+.tag{align-self:flex-start;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--blue);background:var(--blue-soft);padding:4px 10px;border-radius:999px}
+.tag.sample{color:#475569;background:#EEF2F7}
+.project h3{font-size:22px}
+.project .sub{color:var(--muted);font-size:14px;margin-top:-4px}
+dl{margin:2px 0 0;display:grid;gap:8px}
+dt{font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--blue)}
+dd{margin:0;font-size:15px;color:var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:6px}
+.chips span{font-size:12.5px;font-weight:500;background:#F1F5FB;border:1px solid var(--line);padding:3px 10px;border-radius:999px;color:#1E3355}
+.note{font-size:13px;color:#5B6B85;font-style:italic}
+
+/* mock-ups */
+.mock{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:11px;color:#1E293B;box-shadow:0 6px 18px rgba(11,31,58,.08)}
+.mock .bar{display:flex;align-items:center;gap:4px;padding:7px 9px;background:#EEF3FC;border-bottom:1px solid var(--line)}
+.mock .bar i{width:7px;height:7px;border-radius:50%;background:#C5D3EC;display:block}
+.mock .bar b{margin-left:8px;flex:1;background:#fff;border-radius:6px;padding:2px 8px;font-weight:500;color:#64748B;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mock .body2{padding:10px;min-height:168px}
+.chip{display:inline-block;padding:1px 8px;border-radius:999px;font-size:10px;font-weight:700}
+.chip.g{background:#DCFCE7;color:#166534}
+.chip.a{background:#FEF3C7;color:#92400E}
+.chip.r{background:#FEE2E2;color:#991B1B}
+.chip.b{background:#DBEAFE;color:#1E40AF}
+.row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:5px 0;border-bottom:1px solid #EDF2FA}
+.row:last-child{border-bottom:0}
+.mini-btn{display:inline-block;background:var(--blue);color:#fff;border-radius:6px;padding:3px 9px;font-weight:700;font-size:10px}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:8px}
+.kpi{border:1px solid var(--line);border-radius:8px;padding:6px 8px}
+.kpi small{display:block;color:#64748B;font-size:9.5px}
+.kpi strong{font-size:16px;font-family:'Outfit',sans-serif}
+.bars{display:flex;align-items:flex-end;gap:6px;height:60px;padding:4px 2px;border-bottom:1px solid var(--line)}
+.bars i{flex:1;background:var(--blue);border-radius:4px 4px 0 0;display:block;opacity:.9}
+.ring{width:64px;height:64px;border-radius:50%;background:conic-gradient(var(--blue) 0 92%,#E2E8F0 0);display:grid;place-items:center;flex:none}
+.ring span{width:46px;height:46px;border-radius:50%;background:#fff;display:grid;place-items:center;font-weight:800;font-size:12px}
+.tile{border:1px solid var(--line);border-radius:8px;padding:6px 7px;display:flex;align-items:center;justify-content:space-between;gap:4px;font-size:10px}
+.tile span{white-space:nowrap}
+.dotg{width:7px;height:7px;border-radius:50%;background:var(--green);display:inline-block;margin-right:4px}
+.hero-mock{border-radius:8px;padding:14px 12px;background:linear-gradient(135deg,#FDE7C7,#F8C78F);color:#5A3410;margin-bottom:8px}
+.hero-mock strong{display:block;font-family:'Outfit',sans-serif;font-size:15px;margin-bottom:6px}
+.field{border:1px solid #CBD5E1;border-radius:6px;padding:5px 8px;color:#94A3B8;margin-bottom:6px;background:#fff}
+.slots{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px}
+.slots span{border:1px solid #CBD5E1;border-radius:6px;padding:2px 8px}
+.slots span.on{background:var(--blue);color:#fff;border-color:var(--blue)}
+.prod{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.prod div{border:1px solid var(--line);border-radius:8px;padding:6px}
+.prod .img{height:34px;border-radius:6px;background:linear-gradient(135deg,#DBE7FF,#EEF3FF);margin-bottom:4px;border:0;padding:0}
+.sheet{width:100%;border-collapse:collapse;font-size:10.5px}
+.sheet th{background:#1F7A4D;color:#fff;text-align:left;padding:4px 6px;font-weight:700}
+.sheet td{border:1px solid #E2E8F0;padding:4px 6px}
+.sheet tr.hl td{background:#FFF7E0}
+.side{display:grid;grid-template-columns:62px 1fr;gap:8px}
+.side nav{background:var(--navy);border-radius:8px;padding:8px 6px;color:#CBD5E1;display:grid;gap:6px;align-content:start;font-size:9.5px}
+.side nav b{color:#fff}
+
+/* how it works */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:26px}
+.step{padding:22px}
+.step .n{width:34px;height:34px;border-radius:50%;background:var(--blue);color:#fff;font-weight:800;display:grid;place-items:center;margin-bottom:12px;font-family:'Outfit',sans-serif}
+.step h3{font-size:19px;margin-bottom:6px}
+.step p{color:var(--muted);font-size:15px}
+
+/* contact */
+.contact{background:var(--navy);color:#F4F8FF;border-radius:24px;padding:40px 28px;margin:56px 0 24px;display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between}
+.contact h2{font-size:clamp(26px,4vw,38px)}
+.contact p{color:#DCE8FF;margin-top:8px;max-width:46ch}
+.contact .btn{background:#fff;color:var(--navy);border-color:#fff}
+.contact .btn:hover{background:#DCE8FF;border-color:#DCE8FF}
+footer{padding:8px 0 40px;color:#5B6B85;font-size:13px}
+
+@media (max-width:900px){
+  .services{grid-template-columns:repeat(2,1fr)}
+  .steps{grid-template-columns:repeat(2,1fr)}
+  .grid6{grid-template-columns:repeat(2,1fr)}
+  .grid6>.project,.grid6.samples>.project:nth-child(n+4){grid-column:span 1}
+}
+@media (max-width:620px){
+  .services,.steps,.grid6{grid-template-columns:1fr}
+  .grid6>.project,.grid6.samples>.project:nth-child(n+4){grid-column:span 1}
+  section{padding-top:44px}
+  .contact{padding:30px 22px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="nav">
+    <span class="brand">DigitalHelper</span>
+    <a class="btn" data-dm href="#contact">DM me</a>
+  </header>
+
+  <main>
+  <div class="hero">
+    <h1>Digital services for <span>small businesses</span></h1>
+    <p>Websites, online store setup, Excel and hosting. One person, one point of contact.</p>
+    <div class="cta">
+      <a class="btn" data-dm href="#contact">DM me your project</a>
+      <a class="btn ghost" href="#projects">See my work</a>
+    </div>
+  </div>
+
+  <section id="services">
+    <div class="eyebrow">Services</div>
+    <h2>What I can do for you</h2>
+    <div class="services">
+      <article class="card svc">
+        <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18M8 21h8"/></svg></div>
+        <h3>Websites</h3>
+        <p>Business sites, booking and enquiry forms, catalog pages, admin systems with login and reports.</p>
+      </article>
+      <article class="card svc">
+        <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8h12l-1 11H7L6 8z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg></div>
+        <h3>Online store setup</h3>
+        <p>Shopee, Lazada, TikTok Shop and Shopify setup, bulk upload, syncing products and stock.</p>
+      </article>
+      <article class="card svc">
+        <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M4 9h16M4 15h16M10 3v18"/></svg></div>
+        <h3>Excel and Google Sheets</h3>
+        <p>Templates, data cleanup, charts and reports.</p>
+      </article>
+      <article class="card svc">
+        <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="7" rx="2"/><rect x="3" y="13" width="18" height="7" rx="2"/><path d="M7 7.5h.01M7 16.5h.01"/></svg></div>
+        <h3>Hosting and server setup</h3>
+        <p>Put your site online, domain and HTTPS, backups, basic fixes.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="eyebrow">Real projects</div>
+    <h2>Things I have built</h2>
+    <p class="lead">Previews below use sample data only.</p>
+
+    <div class="grid6">
+
+      <article class="card project">
+        <div class="shot" aria-hidden="true">
+          <div class="mock">
+            <div class="bar"><i></i><i></i><i></i><b>tracked / attendance</b></div>
+            <div class="body2">
+              <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px">
+                <div class="ring"><span>92%</span></div>
+                <div><strong style="font-size:13px">Attendance</strong><br><span style="color:#64748B">This month, sample class</span></div>
+              </div>
+              <div class="row"><span>Student A</span><span class="chip g">Present</span></div>
+              <div class="row"><span>Student B</span><span class="chip g">Present</span></div>
+              <div class="row"><span>Student C</span><span class="chip r">Absent</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="body">
+          <span class="tag">Real project</span>
+          <h3>TrackEd</h3>
+          <p class="sub">Attendance portal</p>
+          <dl>
+            <div><dt>Problem</dt><dd>Taking attendance on paper or in scattered files is slow and hard to check.</dd></div>
+            <div><dt>Solution</dt><dd>A web portal to record, view and manage attendance in one place, with login and reports.</dd></div>
+          </dl>
+          <div class="chips"><span>PHP</span><span>MySQL</span><span>JavaScript</span></div>
+          <p class="note">Preview with sample data.</p>
+        </div>
+      </article>
+
+      <article class="card project">
+        <div class="shot" aria-hidden="true">
+          <div class="mock">
+            <div class="bar"><i></i><i></i><i></i><b>auditrix / dashboard</b></div>
+            <div class="body2">
+              <div class="kpis">
+                <div class="kpi"><small>Tickets</small><strong>80</strong></div>
+                <div class="kpi"><small>Auto-cleared</small><strong style="color:#16A34A">23</strong></div>
+                <div class="kpi"><small>Needs review</small><strong style="color:#D97706">57</strong></div>
+              </div>
+              <div class="row"><span>INC-1042 · VPN root cause</span><span><b>93</b> <span class="chip g">Cleared</span></span></div>
+              <div class="row"><span>CR-0345 · Rollback missing</span><span><b>48</b> <span class="chip r">Flagged</span></span></div>
+              <div class="row"><span>SR-0210 · Access request</span><span><b>72</b> <span class="chip a">Review</span></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="body">
+          <span class="tag">Real project</span>
+          <h3>Auditrix</h3>
+          <p class="sub">AI audit platform</p>
+          <dl>
+            <div><dt>Problem</dt><dd>Ticket audits are manual, and different auditors give different scores for the same ticket.</dd></div>
+            <div><dt>Solution</dt><dd>A platform that scores every ticket against a shared rubric, explains each score with evidence, alerts the right auditor in real time, and sends only the exceptions to a human.</dd></div>
+          </dl>
+          <div class="chips"><span>Web dashboard</span><span>AI scoring</span><span>Live monitoring</span><span>Slack and Teams alerts</span></div>
+          <p class="note">Shown with sample data only.</p>
+        </div>
+      </article>
+
+      <article class="card project">
+        <div class="shot" aria-hidden="true">
+          <div class="mock">
+            <div class="bar"><i></i><i></i><i></i><b>marketplace sync</b></div>
+            <div class="body2">
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px">
+                <div class="tile"><span>Shopee</span><span><i class="dotg"></i>Synced</span></div>
+                <div class="tile"><span>Lazada</span><span><i class="dotg"></i>Synced</span></div>
+                <div class="tile"><span>TikTok Shop</span><span><i class="dotg"></i>Synced</span></div>
+                <div class="tile"><span>Shopify</span><span><i class="dotg"></i>Synced</span></div>
+              </div>
+              <div class="row"><span>Sample Tote Bag</span><span>Stock 24 <span class="chip g">OK</span></span></div>
+              <div class="row"><span>Sample Candle</span><span>Stock 3 <span class="chip a">Low</span></span></div>
+              <div class="row"><span>Sample Mug</span><span>Stock 58 <span class="chip g">OK</span></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="body">
+          <span class="tag">Real skill</span>
+          <h3>Marketplace sync dashboard</h3>
+          <p class="sub">My own mock-up</p>
+          <dl>
+            <div><dt>Problem</dt><dd>Sellers update products and stock by hand on each marketplace, which causes mistakes and wasted time.</dd></div>
+            <div><dt>Solution</dt><dd>One dashboard that syncs products, stock and orders across Shopee, Lazada, TikTok Shop and Shopify.</dd></div>
+          </dl>
+          <div class="chips"><span>PHP</span><span>MySQL</span><span>JavaScript</span><span>Marketplace APIs (OAuth)</span></div>
+          <p class="note">Mock-up with sample data.</p>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section id="samples">
+    <div class="eyebrow">Sample projects</div>
+    <h2>What I can build for you</h2>
+    <p class="lead">Made-up businesses and sample data, to show what is possible.</p>
+
+    <div class="grid6 samples">
+
+      <article class="card project">
+        <div class="shot" aria-hidden="true">
+          <div class="mock">
+            <div class="bar"><i></i><i></i><i></i><b>sample-bakery.com</b></div>
+            <div class="body2">
+              <div class="hero-mock"><strong>Fresh bread, every morning</strong><span class="mini-btn">Enquire</span></div>
+              <div class="row"><span>Butter croissant</span><b>RM 4.50</b></div>
+              <div class="row"><span>Sourdough loaf</span><b>RM 14.00</b></div>
+              <div class="row"><span>Cinnamon roll</span><b>RM 6.00</b></div>
+            </div>
+          </div>
+        </div>
+        <div class="body">
+          <span class="tag sample">Sample</span>
+          <h3>Bakery website</h3>
+          <dl>
+            <div><dt>Problem</dt><dd>Customers keep asking for the menu and prices in chat.</dd></div>
+            <div><dt>Solution</dt><dd>A mobile-friendly site with a menu page and an enquiry button.</dd></div>
+          </dl>
+          <div class="chips"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+        </div>
+      </article>
+
+      <article class="card project">
+        <div class="shot" aria-hidden="true">
+          <div class="mock">
+            <div class="bar"><i></i><i></i><i></i><b>sample-salon.com/book</b></div>
+            <div class="body2">
+              <strong style="font-size:13px;display:block;margin-bottom:6px">Book an appointment</strong>
+              <div class="field">Your name</div>
+              <div class="field">Date: 14 Nov 2026</div>
+              <div class="slots"><span>10:00</span><span class="on">11:30</span><span>14:00</span><span>16:30</span></div>
+              <span class="mini-btn">Send booking</span>
+            </div>
+          </div>
+        </div>
+        <div class="body">
+          <span class="tag sample">Sample</span>
+          <h3>Booking and enquiry form</h3>
+          <dl>
+            <div><dt>Problem</dt><dd>Booking by chat means a lot of back and forth.</dd></div>
+            <div><dt>Solution</dt><dd>A form where customers pick a date, and the owner is notified.</dd></div>
+          </dl>
+          <div class="chips"><span>HTML</span><span>JavaScript</span><span>PHP</span><span>MySQL</span></div>
+        </div>
+      </article>
+
+      <article class="card project">
+        <div class="shot" aria-hidden="true">
+          <div class="mock">
+            <div class="bar"><i></i><i></i><i></i><b>sample-shop.com/catalog</b></div>
+            <div class="body2">
+              <div class="prod">
+                <div><div class="img"></div>Tote bag<br><b>RM 29</b> <span class="mini-btn">Enquire</span></div>
+                <div><div class="img"></div>Soy candle<br><b>RM 35</b> <span class="mini-btn">Enquire</span></div>
+                <div><div class="img"></div>Ceramic mug<br><b>RM 22</b> <span class="mini-btn">Enquire</span></div>
+                <div><div class="img"></div>Notebook<br><b>RM 18</b> <span class="mini-btn">Enquire</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="body">
+          <span class="tag sample">Sample</span>
+          <h3>Product catalog page</h3>
+          <dl>
+            <div><dt>Problem</dt><dd>A small seller needs to show products but does not need a full store.</dd></div>
+            <div><dt>Solution</dt><dd>A clean catalog with an "Enquire" button on each product.</dd></div>
+          </dl>
+          <div class="chips"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+        </div>
+      </article>
+
+      <article class="card project">
+        <div class="shot" aria-hidden="true">
+          <div class="mock">
+            <div class="bar"><i></i><i></i><i></i><b>Order and stock tracker</b></div>
+            <div class="body2">
+              <table class="sheet">
+                <tr><th>Order</th><th>Item</th><th>Qty</th><th>Paid</th></tr>
+                <tr><td>#101</td><td>Tote bag</td><td>2</td><td>Yes</td></tr>
+                <tr class="hl"><td>#102</td><td>Candle</td><td>1</td><td>No</td></tr>
+                <tr><td>#103</td><td>Mug</td><td>4</td><td>Yes</td></tr>
+                <tr class="hl"><td>#104</td><td>Notebook</td><td>3</td><td>No</td></tr>
+              </table>
+              <div class="bars" style="margin-top:8px;height:44px"><i style="height:40%"></i><i style="height:70%"></i><i style="height:55%"></i><i style="height:90%"></i><i style="height:65%"></i></div>
+            </div>
+          </div>
+        </div>
+        <div class="body">
+          <span class="tag sample">Sample</span>
+          <h3>Order and stock tracker</h3>
+          <dl>
+            <div><dt>Problem</dt><dd>Orders and stock are tracked on paper or in chat, and unpaid orders get missed.</dd></div>
+            <div><dt>Solution</dt><dd>A Google Sheet with an order list, stock levels, unpaid orders and charts.</dd></div>
+          </dl>
+          <div class="chips"><span>Excel</span><span>Google Sheets</span></div>
+        </div>
+      </article>
+
+      <article class="card project">
+        <div class="shot" aria-hidden="true">
+          <div class="mock">
+            <div class="bar"><i></i><i></i><i></i><b>sample-admin / reports</b></div>
+            <div class="body2">
+              <div class="side">
+                <nav><b>Menu</b><span>Sales</span><span>Orders</span><span>Users</span></nav>
+                <div>
+                  <strong style="font-size:12px">Sales report</strong>
+                  <div class="bars" style="margin:6px 0"><i style="height:35%"></i><i style="height:55%"></i><i style="height:45%"></i><i style="height:80%"></i><i style="height:65%"></i><i style="height:95%"></i></div>
+                  <div class="row"><span>Today</span><b>RM 1,240</b></div>
+                  <div class="row"><span>This month</span><b>RM 18,560</b></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="body">
+          <span class="tag sample">Sample</span>
+          <h3>Admin page with login and report</h3>
+          <dl>
+            <div><dt>Problem</dt><dd>The owner cannot see sales or manage data without asking someone.</dd></div>
+            <div><dt>Solution</dt><dd>A secure login page with a data table and a simple sales report.</dd></div>
+          </dl>
+          <div class="chips"><span>PHP</span><span>MySQL</span><span>JavaScript</span></div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="eyebrow">How it works</div>
+    <h2>Simple and clear</h2>
+    <div class="steps">
+      <article class="card step"><div class="n">1</div><h3>Discuss</h3><p>Tell me your project and budget.</p></article>
+      <article class="card step"><div class="n">2</div><h3>Quotation</h3><p>A clear written quote with scope and price.</p></article>
+      <article class="card step"><div class="n">3</div><h3>Build</h3><p>You review a demo and ask for changes.</p></article>
+      <article class="card step"><div class="n">4</div><h3>Handover</h3><p>The site goes live, and you get the files and login.</p></article>
+    </div>
+  </section>
+
+  <section id="contact" style="padding-top:0">
+    <div class="contact">
+      <div>
+        <h2>Got a project in mind?</h2>
+        <p>DM me your project and budget, and I'll recommend the best option.</p>
+      </div>
+      <a class="btn" data-dm href="#contact">DM me</a>
+    </div>
+  </section>
+  </main>
+
+  <footer>Sample projects use made-up businesses and sample data.</footer>
+</div>
+
+<script>
+/* Put your Threads link between the quotes, for example: https://www.threads.net/@your_username */
+const THREADS_URL = "";
+
+document.querySelectorAll('[data-dm]').forEach(function (a) {
+  if (THREADS_URL) {
+    a.href = THREADS_URL;
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+  }
+});
+</script>
+</body>
+</html>
