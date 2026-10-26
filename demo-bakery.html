@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sample Bakery (Demo)</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=DM+Sans:wght@400;500;700&display=swap">
+<style>
+:root{--bg:#FFF8EF;--ink:#3A2410;--muted:#6B5440;--brand:#B45309;--brand-d:#92400E;--line:#EBD9C3;--card:#FFFFFF}
+*{box-sizing:border-box}
+body{margin:0;font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
+h1,h2,h3{font-family:'Outfit',system-ui,sans-serif;margin:0;line-height:1.1}
+a{color:inherit}
+.demo-bar{background:#0B1F3A;color:#DCE8FF;font-size:13px;padding:8px 16px;display:flex;flex-wrap:wrap;gap:8px 16px;justify-content:space-between;align-items:center}
+.demo-bar a{color:#fff;font-weight:700}
+.wrap{max-width:1000px;margin:0 auto;padding:0 20px}
+header.site{display:flex;justify-content:space-between;align-items:center;padding:18px 0}
+.logo{font-family:'Outfit',sans-serif;font-weight:800;font-size:22px;color:var(--brand-d)}
+nav.site a{margin-left:18px;text-decoration:none;font-weight:500;color:var(--muted)}
+nav.site a:hover{color:var(--brand)}
+.hero{background:linear-gradient(135deg,#FDE7C7,#F8C78F);border-radius:24px;padding:48px 32px;margin-top:8px}
+.hero h1{font-size:clamp(34px,6vw,56px);font-weight:800;color:#5A3410;max-width:14ch}
+.hero p{max-width:40ch;color:#6B4423;margin:14px 0 22px;font-size:18px}
+.btn{display:inline-block;background:var(--brand);color:#fff;border:0;border-radius:999px;padding:12px 24px;font:700 16px 'DM Sans',sans-serif;cursor:pointer;text-decoration:none}
+.btn:hover{background:var(--brand-d)}
+.btn.small{padding:8px 16px;font-size:14px}
+.btn:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #FCD34D;outline-offset:2px}
+h2{font-size:30px;font-weight:800;margin:44px 0 16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.item{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:6px}
+.item .pic{height:96px;border-radius:12px;background:linear-gradient(135deg,#FFE9CC,#FFD7A3);display:grid;place-items:center;font-size:44px}
+.item h3{font-size:19px}
+.item p{margin:0;color:var(--muted);font-size:14.5px}
+.item .foot{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:8px}
+.price{font-weight:800;font-size:17px}
+.info{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px}
+.box h3{margin-bottom:8px;font-size:20px}
+.box p{margin:4px 0;color:var(--muted)}
+footer{padding:36px 0 48px;color:var(--muted);font-size:14px}
+dialog{border:0;border-radius:20px;padding:24px;width:min(440px,92vw);box-shadow:0 20px 60px rgba(0,0,0,.3);font-family:'DM Sans',sans-serif;color:var(--ink)}
+dialog::backdrop{background:rgba(30,15,5,.55)}
+dialog h3{font-size:22px;margin-bottom:4px}
+label{display:block;font-weight:700;font-size:14px;margin:12px 0 4px}
+input,select,textarea{width:100%;padding:10px 12px;border:1px solid #CFB99B;border-radius:10px;font:16px 'DM Sans',sans-serif;background:#fff;color:var(--ink)}
+.row{display:flex;gap:10px;margin-top:16px;justify-content:flex-end}
+.btn.ghost{background:transparent;color:var(--brand-d);border:2px solid var(--brand)}
+.thanks{background:#ECFDF5;border:1px solid #A7F3D0;color:#065F46;border-radius:12px;padding:12px;margin-top:12px;font-size:15px}
+@media (max-width:640px){.info{grid-template-columns:1fr}nav.site a{margin-left:12px}.hero{padding:32px 20px}}
+</style>
+</head>
+<body>
+<div class="demo-bar">
+  <span>Demo page with made-up business and sample data. Nothing is sent or saved.</span>
+  <a href="index.html">Back to portfolio</a>
+</div>
+
+<div class="wrap">
+  <header class="site">
+    <span class="logo">Sample Bakery</span>
+    <nav class="site"><a href="#menu">Menu</a><a href="#visit">Visit</a></nav>
+  </header>
+
+  <section class="hero">
+    <h1>Fresh bread, every morning</h1>
+    <p>Baked in small batches. Ask us about custom cakes and party orders.</p>
+    <a class="btn" href="#menu">See the menu</a>
+  </section>
+
+  <h2 id="menu">Our menu</h2>
+  <div class="grid" id="menuGrid"></div>
+
+  <h2 id="visit">Visit us</h2>
+  <div class="info">
+    <div class="box"><h3>Opening hours</h3><p>Mon to Sat: 7:00 am to 6:00 pm</p><p>Sunday: 8:00 am to 2:00 pm</p></div>
+    <div class="box"><h3>Find us</h3><p>12 Sample Street, Sample Town</p><p>This is a demo address.</p></div>
+  </div>
+
+  <footer>Sample Bakery is a made-up business used to show what a small business website can look like.</footer>
+</div>
+
+<dialog id="dlg">
+  <form method="dialog" id="enq" novalidate>
+    <h3>Enquire</h3>
+    <p style="margin:0;color:#6B5440" id="dlgItem"></p>
+    <label for="n">Your name</label>
+    <input id="n" name="n" autocomplete="off" required>
+    <label for="q">Quantity</label>
+    <select id="q" name="q"><option>1</option><option>2</option><option>6</option><option>12</option></select>
+    <label for="m">Message (optional)</label>
+    <textarea id="m" name="m" rows="3" placeholder="Pickup date, allergies, special requests"></textarea>
+    <div id="msg" role="status" aria-live="polite"></div>
+    <div class="row">
+      <button type="button" class="btn ghost small" id="closeBtn">Close</button>
+      <button type="submit" class="btn small">Send enquiry</button>
+    </div>
+  </form>
+</dialog>
+
+<script>
+var MENU = [
+  {e:"🥐", n:"Butter croissant", d:"Flaky, golden and made fresh daily.", p:4.5},
+  {e:"🍞", n:"Sourdough loaf", d:"Slow-fermented with a crisp crust.", p:14},
+  {e:"🥯", n:"Cinnamon roll", d:"Soft, warm and glazed.", p:6},
+  {e:"🥖", n:"Baguette", d:"Light inside, crunchy outside.", p:8},
+  {e:"🎂", n:"Custom cake", d:"Tell us the flavour and date. Price depends on size.", p:65},
+  {e:"🍪", n:"Choc chip cookies (box of 6)", d:"Chewy centre, crisp edges.", p:18}
+];
+var grid = document.getElementById('menuGrid');
+MENU.forEach(function (it, i) {
+  var d = document.createElement('div');
+  d.className = 'item';
+  d.innerHTML = '<div class="pic" aria-hidden="true">' + it.e + '</div><h3></h3><p></p><div class="foot"><span class="price"></span><button class="btn small" type="button">Enquire</button></div>';
+  d.querySelector('h3').textContent = it.n;
+  d.querySelector('p').textContent = it.d;
+  d.querySelector('.price').textContent = 'RM ' + it.p.toFixed(2);
+  d.querySelector('button').addEventListener('click', function () { openDlg(it); });
+  grid.appendChild(d);
+});
+var dlg = document.getElementById('dlg');
+var form = document.getElementById('enq');
+var msg = document.getElementById('msg');
+function openDlg(it) {
+  document.getElementById('dlgItem').textContent = it.n + ' (RM ' + it.p.toFixed(2) + ')';
+  msg.innerHTML = '';
+  form.reset();
+  if (dlg.showModal) { dlg.showModal(); } else { dlg.setAttribute('open', ''); }
+  document.getElementById('n').focus();
+}
+document.getElementById('closeBtn').addEventListener('click', function () { dlg.close(); });
+form.addEventListener('submit', function (e) {
+  e.preventDefault();
+  var name = document.getElementById('n').value.trim();
+  if (!name) {
+    msg.innerHTML = '<div class="thanks" style="background:#FEF2F2;border-color:#FECACA;color:#991B1B">Please enter your name.</div>';
+    return;
+  }
+  msg.innerHTML = '<div class="thanks">Thank you, ' + name.replace(/[<>&"]/g, '') + '! This is a demo, so nothing was sent. On a real site, the owner would get this enquiry right away.</div>';
+});
+</script>
+</body>
+</html>

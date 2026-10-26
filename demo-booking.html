@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sample Salon Booking (Demo)</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=DM+Sans:wght@400;500;700&display=swap">
+<style>
+:root{--bg:#F6F4FF;--ink:#1E1B3A;--muted:#5B5878;--brand:#6D4AFF;--brand-d:#5636D6;--line:#DDD8F5;--card:#fff}
+*{box-sizing:border-box}
+body{margin:0;font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
+h1,h2,h3{font-family:'Outfit',system-ui,sans-serif;margin:0;line-height:1.1}
+.demo-bar{background:#0B1F3A;color:#DCE8FF;font-size:13px;padding:8px 16px;display:flex;flex-wrap:wrap;gap:8px 16px;justify-content:space-between;align-items:center}
+.demo-bar a{color:#fff;font-weight:700}
+.wrap{max-width:920px;margin:0 auto;padding:0 20px 56px}
+.top{padding:28px 0 8px}
+.logo{font-family:'Outfit',sans-serif;font-weight:800;font-size:22px;color:var(--brand-d)}
+h1{font-size:clamp(30px,5vw,46px);font-weight:800;margin:14px 0 6px}
+.sub{color:var(--muted);margin:0 0 22px}
+.layout{display:grid;grid-template-columns:1.2fr .8fr;gap:20px;align-items:start}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px}
+label,.lab{display:block;font-weight:700;font-size:14px;margin:16px 0 6px}
+label:first-child,.lab:first-child{margin-top:0}
+input,select{width:100%;padding:11px 12px;border:1px solid #C9C2EE;border-radius:10px;font:16px 'DM Sans',sans-serif;background:#fff;color:var(--ink)}
+input:focus-visible,select:focus-visible,.slot:focus-visible,.btn:focus-visible{outline:3px solid #C4B5FD;outline-offset:2px}
+.slots{display:flex;flex-wrap:wrap;gap:8px}
+.slot{border:1px solid #C9C2EE;background:#fff;border-radius:10px;padding:9px 14px;font:500 15px 'DM Sans',sans-serif;cursor:pointer;color:var(--ink)}
+.slot[aria-pressed="true"]{background:var(--brand);color:#fff;border-color:var(--brand)}
+.slot:disabled{background:#F1F0F8;color:#A9A6C0;cursor:not-allowed;text-decoration:line-through}
+.btn{margin-top:20px;background:var(--brand);color:#fff;border:0;border-radius:999px;padding:13px 26px;font:700 16px 'DM Sans',sans-serif;cursor:pointer;width:100%}
+.btn:hover{background:var(--brand-d)}
+.err{color:#B91C1C;font-size:14px;margin-top:10px;min-height:20px}
+.ok{background:#ECFDF5;border:1px solid #A7F3D0;color:#065F46;border-radius:14px;padding:14px;margin-bottom:14px}
+.ok b{display:block;font-size:17px;margin-bottom:4px}
+.note{font-size:14px;color:var(--muted)}
+.phone{border:1px solid var(--line);border-radius:18px;padding:14px;background:#fff}
+.phone h3{font-size:16px;margin-bottom:8px}
+.bubble{background:#E9E4FF;border-radius:14px;padding:12px;font-size:14.5px;min-height:90px;color:#2A2552;white-space:pre-line}
+.bubble.empty{color:#8A86A8;font-style:italic}
+@media (max-width:760px){.layout{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="demo-bar">
+  <span>Demo page with made-up business and sample data. Nothing is sent or saved.</span>
+  <a href="index.html">Back to portfolio</a>
+</div>
+
+<div class="wrap">
+  <div class="top">
+    <span class="logo">Sample Salon</span>
+    <h1>Book an appointment</h1>
+    <p class="sub">Pick a service, a date and a time. We will confirm by message.</p>
+  </div>
+
+  <div class="layout">
+    <form class="card" id="bk" novalidate>
+      <label for="svc">Service</label>
+      <select id="svc">
+        <option value="Haircut|45">Haircut (RM 45)</option>
+        <option value="Hair colour|120">Hair colour (RM 120)</option>
+        <option value="Hair treatment|80">Hair treatment (RM 80)</option>
+      </select>
+
+      <label for="date">Date</label>
+      <input type="date" id="date">
+
+      <div class="lab" id="timeLab">Time</div>
+      <div class="slots" role="group" aria-labelledby="timeLab" id="slots"></div>
+
+      <label for="name">Your name</label>
+      <input id="name" autocomplete="off">
+
+      <label for="phone">Phone number</label>
+      <input id="phone" inputmode="tel" autocomplete="off" placeholder="e.g. 012-3456789">
+
+      <div class="err" id="err" role="alert"></div>
+      <button class="btn" type="submit">Send booking</button>
+    </form>
+
+    <aside>
+      <div id="confirm"></div>
+      <div class="phone">
+        <h3>What the owner receives</h3>
+        <div class="bubble empty" id="bubble">Fill in the form and send it. The owner's message will appear here.</div>
+        <p class="note">On a real site, this arrives by WhatsApp, email or Telegram, so no more back and forth in chat.</p>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<script>
+var TIMES = ["10:00", "11:30", "14:00", "15:30", "16:30"];
+var FULL = ["14:00"];
+var chosen = "";
+var slotsEl = document.getElementById('slots');
+TIMES.forEach(function (t) {
+  var b = document.createElement('button');
+  b.type = 'button';
+  b.className = 'slot';
+  b.textContent = t;
+  b.setAttribute('aria-pressed', 'false');
+  if (FULL.indexOf(t) > -1) { b.disabled = true; b.title = 'Fully booked'; }
+  b.addEventListener('click', function () {
+    chosen = t;
+    slotsEl.querySelectorAll('.slot').forEach(function (s) { s.setAttribute('aria-pressed', String(s === b)); });
+  });
+  slotsEl.appendChild(b);
+});
+
+var dateEl = document.getElementById('date');
+var today = new Date();
+today.setMinutes(today.getMinutes() - today.getTimezoneOffset());
+dateEl.min = today.toISOString().slice(0, 10);
+
+function clean(s) { return s.replace(/[<>&"]/g, ''); }
+
+document.getElementById('bk').addEventListener('submit', function (e) {
+  e.preventDefault();
+  var err = document.getElementById('err');
+  var svc = document.getElementById('svc').value.split('|');
+  var date = dateEl.value;
+  var name = clean(document.getElementById('name').value.trim());
+  var phone = clean(document.getElementById('phone').value.trim());
+  err.textContent = '';
+  if (!date) { err.textContent = 'Please pick a date.'; dateEl.focus(); return; }
+  if (!chosen) { err.textContent = 'Please pick a time.'; return; }
+  if (!name) { err.textContent = 'Please enter your name.'; document.getElementById('name').focus(); return; }
+  if (!/^[0-9+\-\s]{9,15}$/.test(phone)) { err.textContent = 'Please enter a valid phone number.'; document.getElementById('phone').focus(); return; }
+
+  var nice = new Date(date + 'T00:00:00').toLocaleDateString('en-GB', {weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'});
+  document.getElementById('confirm').innerHTML =
+    '<div class="ok"><b>Booking received</b>' + svc[0] + ' on ' + nice + ' at ' + chosen + '. We will message you to confirm. (Demo only.)</div>';
+  var bubble = document.getElementById('bubble');
+  bubble.classList.remove('empty');
+  bubble.textContent = 'New booking request\nName: ' + name + '\nPhone: ' + phone + '\nService: ' + svc[0] + ' (RM ' + svc[1] + ')\nDate: ' + nice + '\nTime: ' + chosen;
+});
+</script>
+</body>
+</html>

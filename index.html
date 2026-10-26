@@ -119,6 +119,64 @@ dd{margin:0;font-size:15px;color:var(--ink)}
 .step h3{font-size:19px;margin-bottom:6px}
 .step p{color:var(--muted);font-size:15px}
 
+/* hero with visual */
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:28px;align-items:center;padding:28px 0 8px}
+.hero h1{font-size:clamp(38px,5.4vw,66px);max-width:11ch}
+.hero-vis{position:relative;min-height:350px}
+.hero-vis .mock{position:absolute}
+.hero-vis .f1{left:12%;right:0;top:0}
+.hero-vis .f2{left:0;top:170px;width:200px}
+.hero-vis .f3{right:6px;top:268px;width:210px}
+.hero-vis .mock .body2{min-height:0}
+.float{animation:floaty 6s ease-in-out infinite}
+.f2.float{animation-duration:7s;animation-delay:-2s}
+.f3.float{animation-duration:8s;animation-delay:-4s}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+.hero-chip{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700}
+.hero-chip .tick{width:22px;height:22px;border-radius:50%;background:#DCFCE7;color:#166534;display:grid;place-items:center;font-size:13px;flex:none}
+.hero-chip small{display:block;font-weight:400;color:#64748B;font-size:11px}
+
+/* why choose me */
+.why{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:26px}
+.why .card{padding:22px}
+.why h3{font-size:19px;margin-bottom:8px}
+.why p{color:var(--muted);font-size:15px}
+.why .num{font-family:'Outfit',sans-serif;font-weight:800;color:var(--blue);font-size:15px;letter-spacing:2px;margin-bottom:10px}
+
+/* demo links */
+a.demo{align-self:flex-start;text-decoration:none;font-weight:700;font-size:14px;color:#fff;background:var(--blue);padding:7px 14px;border-radius:999px;margin:2px 0}
+a.demo:hover{background:#1D4ED8}
+
+/* faq */
+.faq{margin-top:26px;display:grid;gap:10px}
+.faq details{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:0 20px}
+.faq summary{cursor:pointer;font-weight:700;padding:16px 0;list-style:none;display:flex;justify-content:space-between;gap:12px;align-items:center}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:22px;color:var(--blue);line-height:1}
+.faq details[open] summary::after{content:"\2212"}
+.faq details p{padding:0 0 16px;color:var(--muted)}
+
+/* contact form */
+.form{margin-top:18px;padding:24px;display:grid;gap:14px}
+.form[hidden]{display:none}
+.form h3{font-size:22px}
+.form .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form label{font-weight:700;font-size:14px;display:block;margin-bottom:6px}
+.form input,.form select,.form textarea{width:100%;padding:11px 13px;border:1px solid #BCCBEA;border-radius:12px;font:16px 'DM Sans',sans-serif;background:#fff;color:var(--ink)}
+.form input:focus-visible,.form select:focus-visible,.form textarea:focus-visible{outline:3px solid #93C5FD;outline-offset:1px}
+.form .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.form button{justify-self:start;cursor:pointer;font-size:16px;font-family:'DM Sans',sans-serif}
+.form .status{min-height:22px;font-size:15px}
+.form .status.ok{color:#166534}
+.form .status.bad{color:#B91C1C}
+
+/* scroll reveal (only when JS is on) */
+.js .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.js .reveal.in{opacity:1;transform:none}
+.card{transition:transform .2s ease,box-shadow .2s ease}
+.card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(11,31,58,.10)}
+.js .reveal.in:hover{transform:translateY(-3px)}
+
 /* contact */
 .contact{background:var(--navy);color:#F4F8FF;border-radius:24px;padding:40px 28px;margin:56px 0 24px;display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between}
 .contact h2{font-size:clamp(26px,4vw,38px)}
@@ -139,7 +197,25 @@ footer{padding:8px 0 40px;color:#5B6B85;font-size:13px}
   section{padding-top:44px}
   .contact{padding:30px 22px}
 }
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}}
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr}
+  .hero h1{max-width:none}
+  .hero-vis{min-height:330px;max-width:520px}
+  .why{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:620px){
+  .why{grid-template-columns:1fr}
+  .form .two{grid-template-columns:1fr}
+  .hero-vis .f1{left:6%}
+  .hero-vis .f2{width:170px;top:176px}
+  .hero-vis .f3{width:180px;top:272px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .btn,.card{transition:none}
+  .float{animation:none}
+  .js .reveal{opacity:1;transform:none;transition:none}
+}
 </style>
 </head>
 <body>
@@ -152,11 +228,34 @@ footer{padding:8px 0 40px;color:#5B6B85;font-size:13px}
 
   <main>
   <div class="hero">
-    <h1>Digital services for <span>small businesses</span></h1>
-    <p>Websites, online store setup, Excel and hosting. One person, one point of contact.</p>
-    <div class="cta">
-      <a class="btn" data-dm href="#contact">DM me your project</a>
-      <a class="btn ghost" href="#projects">See my work</a>
+    <div class="hero-copy">
+      <h1>Digital services for <span>small businesses</span></h1>
+      <p>Websites, online store setup, Excel and hosting. One person, one point of contact.</p>
+      <div class="cta">
+        <a class="btn" data-dm href="#contact">DM me your project</a>
+        <a class="btn ghost" href="#samples">Try a live demo</a>
+      </div>
+    </div>
+    <div class="hero-vis" aria-hidden="true">
+      <div class="mock f1 float">
+        <div class="bar"><i></i><i></i><i></i><b>your-business.com/admin</b></div>
+        <div class="body2">
+          <strong style="font-size:12px">Sales report</strong>
+          <div class="bars" style="margin:6px 0"><i style="height:35%"></i><i style="height:55%"></i><i style="height:45%"></i><i style="height:80%"></i><i style="height:65%"></i><i style="height:95%"></i></div>
+          <div class="row"><span>Today</span><b>RM 1,240</b></div>
+          <div class="row"><span>This month</span><b>RM 18,560</b></div>
+        </div>
+      </div>
+      <div class="mock f2 float">
+        <div class="body2" style="padding:12px">
+          <div class="hero-chip"><span class="tick">&#10003;</span><span>Booking received<small>Sat, 11:30 am</small></span></div>
+        </div>
+      </div>
+      <div class="mock f3 float">
+        <div class="body2" style="padding:12px">
+          <div class="hero-chip"><span class="tick">&#8635;</span><span>Stock synced<small>Shopee, Lazada, TikTok Shop</small></span></div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -187,6 +286,17 @@ footer{padding:8px 0 40px;color:#5B6B85;font-size:13px}
     </div>
   </section>
 
+  <section id="why">
+    <div class="eyebrow">Why choose me</div>
+    <h2>Simple, clear and reliable</h2>
+    <div class="why">
+      <article class="card"><div class="num">01</div><h3>One point of contact</h3><p>You talk to the person who builds your project, not a chain of people.</p></article>
+      <article class="card"><div class="num">02</div><h3>Clear quotation</h3><p>Scope and price in writing before work starts. No hidden costs.</p></article>
+      <article class="card"><div class="num">03</div><h3>Made for small business</h3><p>Practical solutions that fit your budget, with no extras you do not need.</p></article>
+      <article class="card"><div class="num">04</div><h3>Yours to keep</h3><p>At handover you get the files and login details, so your site belongs to you.</p></article>
+    </div>
+  </section>
+
   <section id="projects">
     <div class="eyebrow">Real projects</div>
     <h2>Things I have built</h2>
@@ -197,27 +307,32 @@ footer{padding:8px 0 40px;color:#5B6B85;font-size:13px}
       <article class="card project">
         <div class="shot" aria-hidden="true">
           <div class="mock">
-            <div class="bar"><i></i><i></i><i></i><b>tracked / attendance</b></div>
+            <div class="bar"><i></i><i></i><i></i><b>tracked / parent dashboard</b></div>
             <div class="body2">
               <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px">
-                <div class="ring"><span>92%</span></div>
-                <div><strong style="font-size:13px">Attendance</strong><br><span style="color:#64748B">This month, sample class</span></div>
+                <div class="ring"><span>B+</span></div>
+                <div><strong style="font-size:13px">Student A, Form 3</strong><br><span style="color:#64748B">Parent view, sample data</span></div>
               </div>
-              <div class="row"><span>Student A</span><span class="chip g">Present</span></div>
-              <div class="row"><span>Student B</span><span class="chip g">Present</span></div>
-              <div class="row"><span>Student C</span><span class="chip r">Absent</span></div>
+              <div class="kpis">
+                <div class="kpi"><small>Attendance</small><strong>94%</strong></div>
+                <div class="kpi"><small>Homework</small><strong>8/9</strong></div>
+                <div class="kpi"><small>Vs class avg</small><strong style="color:#16A34A">+3%</strong></div>
+              </div>
+              <div class="row"><span>Maths test</span><span class="chip g">82</span></div>
+              <div class="row"><span>Late to class</span><span class="chip a">Minor</span></div>
             </div>
           </div>
         </div>
         <div class="body">
           <span class="tag">Real project</span>
           <h3>TrackEd</h3>
-          <p class="sub">Attendance portal</p>
+          <p class="sub">Web-based student progress monitoring portal for secondary schools</p>
           <dl>
-            <div><dt>Problem</dt><dd>Taking attendance on paper or in scattered files is slow and hard to check.</dd></div>
-            <div><dt>Solution</dt><dd>A web portal to record, view and manage attendance in one place, with login and reports.</dd></div>
+            <div><dt>Problem</dt><dd>In secondary schools, attendance, discipline, homework and marks are often recorded separately, and parents rarely see their child's progress in one place.</dd></div>
+            <div><dt>Solution</dt><dd>A web portal with three roles. Teachers record attendance, discipline, homework and marks. Parents see everything in one dashboard. Admins manage users, classes and timetables.</dd></div>
+            <div><dt>Features</dt><dd>Role-based access, PT3 and SPM grading, class average comparison, timetable, Excel export, and secure login (Bcrypt, prepared statements, session timeout).</dd></div>
           </dl>
-          <div class="chips"><span>PHP</span><span>MySQL</span><span>JavaScript</span></div>
+          <div class="chips"><span>PHP</span><span>MySQL</span><span>JavaScript</span><span>PDO</span><span>Bcrypt</span></div>
           <p class="note">Preview with sample data.</p>
         </div>
       </article>
@@ -306,6 +421,7 @@ footer{padding:8px 0 40px;color:#5B6B85;font-size:13px}
         <div class="body">
           <span class="tag sample">Sample</span>
           <h3>Bakery website</h3>
+          <a class="demo" href="demo-bakery.html">Try the live demo</a>
           <dl>
             <div><dt>Problem</dt><dd>Customers keep asking for the menu and prices in chat.</dd></div>
             <div><dt>Solution</dt><dd>A mobile-friendly site with a menu page and an enquiry button.</dd></div>
@@ -330,6 +446,7 @@ footer{padding:8px 0 40px;color:#5B6B85;font-size:13px}
         <div class="body">
           <span class="tag sample">Sample</span>
           <h3>Booking and enquiry form</h3>
+          <a class="demo" href="demo-booking.html">Try the live demo</a>
           <dl>
             <div><dt>Problem</dt><dd>Booking by chat means a lot of back and forth.</dd></div>
             <div><dt>Solution</dt><dd>A form where customers pick a date, and the owner is notified.</dd></div>
@@ -355,6 +472,7 @@ footer{padding:8px 0 40px;color:#5B6B85;font-size:13px}
         <div class="body">
           <span class="tag sample">Sample</span>
           <h3>Product catalog page</h3>
+          <a class="demo" href="demo-catalog.html">Try the live demo</a>
           <dl>
             <div><dt>Problem</dt><dd>A small seller needs to show products but does not need a full store.</dd></div>
             <div><dt>Solution</dt><dd>A clean catalog with an "Enquire" button on each product.</dd></div>
@@ -432,6 +550,20 @@ footer{padding:8px 0 40px;color:#5B6B85;font-size:13px}
     </div>
   </section>
 
+  <section id="faq">
+    <div class="eyebrow">FAQ</div>
+    <h2>Common questions</h2>
+    <div class="faq">
+      <details><summary>How much does a project cost?</summary><p>It depends on what you need. DM me your project and budget, and I'll recommend the best option with a written quotation.</p></details>
+      <details><summary>How long does it take?</summary><p>It depends on the size of the project and how quickly I receive your content. I give a clear timeline in the quotation before we start.</p></details>
+      <details><summary>How do payments work?</summary><p>All payment terms are written in the quotation, so both of us know what to expect. For projects, a deposit is paid before work starts and the balance on delivery.</p></details>
+      <details><summary>Will I own my website?</summary><p>Yes. After the final payment you get the files and login details.</p></details>
+      <details><summary>Can you host it and keep it running?</summary><p>Yes. I can set up hosting, your domain and HTTPS, and offer monthly maintenance if you want ongoing support.</p></details>
+      <details><summary>Do you help online sellers?</summary><p>Yes. I help with Shopee, Lazada, TikTok Shop and Shopify setup, bulk product upload, copying products between channels, and stock sync.</p></details>
+      <details><summary>What do you need from me to start?</summary><p>A short description of your business, what you want the site or tool to do, examples you like, and your logo and photos if you have them.</p></details>
+    </div>
+  </section>
+
   <section id="contact" style="padding-top:0">
     <div class="contact">
       <div>
@@ -440,6 +572,28 @@ footer{padding:8px 0 40px;color:#5B6B85;font-size:13px}
       </div>
       <a class="btn" data-dm href="#contact">DM me</a>
     </div>
+    <form class="card form" id="contactForm" hidden novalidate>
+      <h3>Or send your project details here</h3>
+      <div class="two">
+        <div><label for="f-name">Your name</label><input id="f-name" name="name" autocomplete="name" required></div>
+        <div><label for="f-contact">Email or WhatsApp</label><input id="f-contact" name="contact" autocomplete="off" required></div>
+      </div>
+      <div class="two">
+        <div><label for="f-type">What do you need?</label>
+          <select id="f-type" name="service">
+            <option>Website</option>
+            <option>Online store setup</option>
+            <option>Excel or Google Sheets</option>
+            <option>Hosting and server setup</option>
+            <option>Not sure yet</option>
+          </select></div>
+        <div><label for="f-budget">Budget (optional)</label><input id="f-budget" name="budget" placeholder="e.g. RM 800"></div>
+      </div>
+      <div><label for="f-msg">Tell me about your project</label><textarea id="f-msg" name="message" rows="4" required></textarea></div>
+      <div class="hp" aria-hidden="true"><label>Leave this empty<input name="_gotcha" tabindex="-1" autocomplete="off"></label></div>
+      <button class="btn" type="submit">Send</button>
+      <div class="status" id="formStatus" role="status" aria-live="polite"></div>
+    </form>
   </section>
   </main>
 
@@ -450,6 +604,11 @@ footer{padding:8px 0 40px;color:#5B6B85;font-size:13px}
 /* Put your Threads link between the quotes, for example: https://www.threads.net/@your_username */
 const THREADS_URL = "";
 
+/* Optional contact form. Create a free form at formspree.io, then paste its link here,
+   for example: https://formspree.io/f/abcdwxyz
+   Until you do, the form stays hidden and visitors use the DM button. */
+const FORM_URL = "";
+
 document.querySelectorAll('[data-dm]').forEach(function (a) {
   if (THREADS_URL) {
     a.href = THREADS_URL;
@@ -457,6 +616,62 @@ document.querySelectorAll('[data-dm]').forEach(function (a) {
     a.rel = "noopener noreferrer";
   }
 });
+</script>
+<script>
+(function () {
+  /* Scroll reveal. Content stays visible if JS or IntersectionObserver is missing. */
+  var canReveal = 'IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (canReveal) {
+    document.documentElement.classList.add('js');
+    var targets = document.querySelectorAll('section .eyebrow, section h2, section .lead, .card, .faq details, .contact');
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    targets.forEach(function (el) {
+      var sib = Array.prototype.indexOf.call(el.parentNode.children, el);
+      el.style.transitionDelay = Math.min(sib, 5) * 70 + 'ms';
+      el.classList.add('reveal');
+      io.observe(el);
+    });
+  }
+
+  /* Contact form (only shown when FORM_URL is set). */
+  var form = document.getElementById('contactForm');
+  if (!form || !FORM_URL) { return; }
+  form.hidden = false;
+  var status = document.getElementById('formStatus');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    status.className = 'status';
+    var name = form.elements['name'].value.trim();
+    var contact = form.elements['contact'].value.trim();
+    var message = form.elements['message'].value.trim();
+    if (!name || !contact || !message) {
+      status.className = 'status bad';
+      status.textContent = 'Please fill in your name, contact and project details.';
+      return;
+    }
+    status.textContent = 'Sending...';
+    fetch(FORM_URL, {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: new FormData(form)
+    }).then(function (r) {
+      if (r.ok) {
+        form.reset();
+        status.className = 'status ok';
+        status.textContent = 'Thank you! I received your message and will reply soon.';
+      } else {
+        throw new Error('bad response');
+      }
+    }).catch(function () {
+      status.className = 'status bad';
+      status.textContent = 'Sorry, it did not send. Please DM me instead.';
+    });
+  });
+})();
 </script>
 </body>
 </html>

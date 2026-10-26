@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sample Shop Catalog (Demo)</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=DM+Sans:wght@400;500;700&display=swap">
+<style>
+:root{--bg:#F4F8FF;--ink:#0B1F3A;--muted:#475A78;--brand:#2563EB;--brand-d:#1D4ED8;--line:#D3E0F5;--card:#fff}
+*{box-sizing:border-box}
+body{margin:0;font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
+h1,h2,h3{font-family:'Outfit',system-ui,sans-serif;margin:0;line-height:1.1}
+.demo-bar{background:#0B1F3A;color:#DCE8FF;font-size:13px;padding:8px 16px;display:flex;flex-wrap:wrap;gap:8px 16px;justify-content:space-between;align-items:center}
+.demo-bar a{color:#fff;font-weight:700}
+.wrap{max-width:1000px;margin:0 auto;padding:0 20px 56px}
+.logo{font-family:'Outfit',sans-serif;font-weight:800;font-size:22px;color:var(--brand-d);display:block;padding-top:24px}
+h1{font-size:clamp(30px,5vw,46px);font-weight:800;margin:12px 0 6px}
+.sub{color:var(--muted);margin:0 0 20px}
+.tools{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:18px}
+.chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 16px;font:500 15px 'DM Sans',sans-serif;cursor:pointer;color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--brand);color:#fff;border-color:var(--brand)}
+.search{flex:1;min-width:180px}
+input[type=search],textarea{width:100%;padding:10px 14px;border:1px solid #BCCBEA;border-radius:12px;font:16px 'DM Sans',sans-serif;background:#fff;color:var(--ink)}
+.chip:focus-visible,.btn:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #93C5FD;outline-offset:2px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px}
+.p{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px;display:flex;flex-direction:column;gap:6px}
+.pic{height:110px;border-radius:12px;background:linear-gradient(135deg,#DBE7FF,#EEF3FF);display:grid;place-items:center;font-size:46px}
+.p h3{font-size:18px}
+.cat{font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--brand);font-weight:700}
+.foot{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:8px}
+.price{font-weight:800}
+.btn{background:var(--brand);color:#fff;border:0;border-radius:999px;padding:8px 16px;font:700 14px 'DM Sans',sans-serif;cursor:pointer}
+.btn:hover{background:var(--brand-d)}
+.btn.ghost{background:transparent;color:var(--brand-d);border:2px solid var(--brand)}
+.empty{color:var(--muted);padding:24px 0}
+dialog{border:0;border-radius:20px;padding:24px;width:min(460px,92vw);box-shadow:0 20px 60px rgba(0,0,0,.3);font-family:'DM Sans',sans-serif;color:var(--ink)}
+dialog::backdrop{background:rgba(11,31,58,.55)}
+dialog h3{font-size:22px;margin-bottom:6px}
+dialog p{margin:6px 0;color:var(--muted);font-size:15px}
+.row{display:flex;gap:10px;margin-top:14px;justify-content:flex-end}
+.done{color:#065F46;font-size:14px;min-height:20px;margin-top:8px}
+</style>
+</head>
+<body>
+<div class="demo-bar">
+  <span>Demo page with made-up business and sample data. Nothing is sent or saved.</span>
+  <a href="index.html">Back to portfolio</a>
+</div>
+
+<div class="wrap">
+  <span class="logo">Sample Shop</span>
+  <h1>Product catalog</h1>
+  <p class="sub">Browse our products and tap Enquire. No cart, no checkout, just a simple message to the owner.</p>
+
+  <div class="tools">
+    <div class="search"><input type="search" id="q" placeholder="Search products" aria-label="Search products"></div>
+    <div id="cats" role="group" aria-label="Filter by category" style="display:flex;flex-wrap:wrap;gap:8px"></div>
+  </div>
+
+  <div class="grid" id="grid"></div>
+  <p class="empty" id="empty" hidden>No products match your search.</p>
+</div>
+
+<dialog id="dlg">
+  <h3>Enquire about this product</h3>
+  <p id="what"></p>
+  <label for="msg" style="font-weight:700;font-size:14px;display:block;margin-top:10px">Your message</label>
+  <textarea id="msg" rows="4"></textarea>
+  <div class="done" id="done" role="status" aria-live="polite"></div>
+  <div class="row">
+    <button class="btn ghost" type="button" id="close">Close</button>
+    <button class="btn" type="button" id="copy">Copy message</button>
+  </div>
+  <p style="font-size:13px">On a real site, this button opens WhatsApp or sends the message straight to the owner.</p>
+</dialog>
+
+<script>
+var PRODUCTS = [
+  {n:"Canvas tote bag", c:"Accessories", p:29, e:"👜"},
+  {n:"Soy candle", c:"Home", p:35, e:"🕯️"},
+  {n:"Ceramic mug", c:"Home", p:22, e:"☕"},
+  {n:"A5 notebook", c:"Stationery", p:18, e:"📓"},
+  {n:"Bucket hat", c:"Accessories", p:39, e:"🧢"},
+  {n:"Desk plant pot", c:"Home", p:25, e:"🪴"},
+  {n:"Gel pen set", c:"Stationery", p:15, e:"🖊️"},
+  {n:"Phone pouch", c:"Accessories", p:32, e:"📱"}
+];
+var cats = ["All"].concat(PRODUCTS.map(function (x) { return x.c; }).filter(function (v, i, a) { return a.indexOf(v) === i; }));
+var current = "All";
+var grid = document.getElementById('grid');
+var catsEl = document.getElementById('cats');
+var qEl = document.getElementById('q');
+var dlg = document.getElementById('dlg');
+var msg = document.getElementById('msg');
+var done = document.getElementById('done');
+var picked = null;
+
+cats.forEach(function (c) {
+  var b = document.createElement('button');
+  b.type = 'button'; b.className = 'chip'; b.textContent = c;
+  b.setAttribute('aria-pressed', String(c === current));
+  b.addEventListener('click', function () {
+    current = c;
+    catsEl.querySelectorAll('.chip').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+    render();
+  });
+  catsEl.appendChild(b);
+});
+
+function render() {
+  var term = qEl.value.trim().toLowerCase();
+  grid.innerHTML = '';
+  var shown = PRODUCTS.filter(function (x) {
+    return (current === "All" || x.c === current) && x.n.toLowerCase().indexOf(term) > -1;
+  });
+  shown.forEach(function (x) {
+    var d = document.createElement('div');
+    d.className = 'p';
+    d.innerHTML = '<div class="pic" aria-hidden="true">' + x.e + '</div><span class="cat"></span><h3></h3><div class="foot"><span class="price"></span><button type="button" class="btn">Enquire</button></div>';
+    d.querySelector('.cat').textContent = x.c;
+    d.querySelector('h3').textContent = x.n;
+    d.querySelector('.price').textContent = 'RM ' + x.p;
+    d.querySelector('button').addEventListener('click', function () { openDlg(x); });
+    grid.appendChild(d);
+  });
+  document.getElementById('empty').hidden = shown.length > 0;
+}
+
+function openDlg(x) {
+  picked = x;
+  document.getElementById('what').textContent = x.n + ' (RM ' + x.p + ')';
+  msg.value = "Hi, I'm interested in the " + x.n + " (RM " + x.p + "). Is it available?";
+  done.textContent = '';
+  if (dlg.showModal) { dlg.showModal(); } else { dlg.setAttribute('open', ''); }
+}
+document.getElementById('close').addEventListener('click', function () { dlg.close(); });
+document.getElementById('copy').addEventListener('click', function () {
+  var ok = function () { done.textContent = 'Message copied. In a real site it would be sent for you.'; };
+  var fail = function () { msg.select(); done.textContent = 'Select the text and copy it.'; };
+  try {
+    if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(msg.value).then(ok, fail); }
+    else { fail(); }
+  } catch (e) { fail(); }
+});
+qEl.addEventListener('input', render);
+render();
+</script>
+</body>
+</html>
