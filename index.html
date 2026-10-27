@@ -160,6 +160,33 @@ dd{margin:0;font-size:15px}
 .svc-dark.static .cards{display:grid;gap:16px;margin-top:30px;justify-items:center;padding:0 var(--pad)}
 .svc-dark.static .scard{position:relative;left:auto;top:auto;margin:0;width:min(980px,100%);height:auto;min-height:300px;padding-bottom:90px}
 
+
+/* cursor label */
+.cur{position:fixed;left:0;top:0;z-index:60;width:96px;height:96px;margin:-48px 0 0 -48px;border-radius:50%;background:var(--pink);color:#fff;display:none;place-items:center;text-align:center;font-weight:600;font-size:13px;line-height:1.15;padding:10px;pointer-events:none;transform:translate3d(-200px,-200px,0) scale(0);transition:opacity .2s;will-change:transform}
+.cur span{display:block;transition:transform .25s}
+@media (hover:hover) and (pointer:fine){.cur{display:grid}.js .pan[data-cur]{cursor:none}}
+.vwrap{position:relative;line-height:0}
+.vwrap video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .3s;background:#fff}
+.pan.vplay.vok .vwrap video{opacity:1}
+a.pan{display:block;text-decoration:none;color:inherit}
+
+/* steps: black band, cards slide sideways */
+.steps-dark{background:var(--black);color:#fff;margin-top:clamp(70px,11vw,140px);padding:0}
+.steps-dark .head .mono{color:#8C95A3}
+.sw{height:300svh;position:relative}
+.sstage{position:sticky;top:0;height:100svh;overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:clamp(24px,5vh,56px)}
+.sstage .head{padding-top:70px}
+.strack{display:flex;gap:clamp(16px,2vw,28px);padding:0 var(--pad);width:max-content;will-change:transform}
+.scd{flex:none;width:min(440px,78vw);height:min(46svh,380px);background:#1A1F27;border:1px solid #2A313C;border-radius:26px;padding:clamp(20px,2.4vw,34px);display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+.scd .big{font-size:clamp(70px,9vw,130px);font-weight:500;letter-spacing:-.05em;line-height:.9;color:var(--pink)}
+.scd h3{font-size:clamp(28px,3vw,42px);font-weight:500;letter-spacing:-.03em;margin-bottom:8px}
+.scd p{color:#A6AEBB;font-size:16.5px;max-width:28ch}
+.scd .art2{position:absolute;right:16px;top:16px;width:92px;height:auto;opacity:.9}
+.steps-dark.static .sw{height:auto;padding-bottom:70px}
+.steps-dark.static .sstage{position:static;height:auto;overflow:visible}
+.steps-dark.static .strack{width:auto;flex-direction:column}
+.steps-dark.static .scd{width:100%;height:auto;min-height:220px;gap:30px}
+
 /* about */
 .about{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(24px,5vw,80px);padding:clamp(40px,6vw,80px) var(--pad) 0;align-items:center}
 .portrait{position:relative;background:var(--pink);border-radius:26px;aspect-ratio:1/1.05;overflow:hidden}
@@ -264,7 +291,6 @@ footer{padding:clamp(70px,10vw,130px) var(--pad) 28px;display:flex;justify-conte
     <a href="#projects">Work</a>
     <a href="#services">Services</a>
     <a href="#about">About</a>
-    <a href="#faq">FAQ</a>
     <span class="mono clock" id="clock" aria-hidden="true"></span>
   </nav>
   <a class="wa" data-wa="" href="#contact"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.2 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l1.8.9c.3.1.5.2.5.3.1.2.1.8-.1 1.4z"/></svg>WhatsApp</a>
@@ -307,7 +333,7 @@ footer{padding:clamp(70px,10vw,130px) var(--pad) 28px;display:flex;justify-conte
     <div class="grid2">
 
       <article class="proj rv" style="--tint:#FFC9E6">
-        <div class="pan"><div class="frame"><div class="bar"><i></i><i></i><i></i><b>sample-bakery.com</b></div><img src="shot-bakery.webp" alt="Bakery website demo" width="1000" height="603" loading="lazy"></div></div>
+        <a class="pan" href="demo-bakery.html" data-cur="Try live demo" aria-label="Open the bakery demo"><div class="frame"><div class="bar"><i></i><i></i><i></i><b>sample-bakery.com</b></div><div class="vwrap"><img src="shot-bakery.webp" alt="Bakery website demo" width="1000" height="603" loading="lazy"><video muted loop playsinline preload="none" data-src="vid-bakery.webm" aria-hidden="true"></video></div></div></a>
         <div class="pmeta"><div><h3>Bakery website</h3><p>A simple site with a menu and an enquiry button.</p></div><span class="mono">Sample</span></div>
         <div class="ptags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
         <a class="demo" href="demo-bakery.html">Try the live demo &#8599;</a>
@@ -317,7 +343,7 @@ footer{padding:clamp(70px,10vw,130px) var(--pad) 28px;display:flex;justify-conte
       </article>
 
       <article class="proj rv" style="--tint:#FFA8D6">
-        <div class="pan"><div class="frame"><div class="bar"><i></i><i></i><i></i><b>sample-salon.com/book</b></div><img src="shot-booking.webp" alt="Booking form demo" width="1000" height="603" loading="lazy"></div></div>
+        <a class="pan" href="demo-booking.html" data-cur="Try live demo" aria-label="Open the booking demo"><div class="frame"><div class="bar"><i></i><i></i><i></i><b>sample-salon.com/book</b></div><div class="vwrap"><img src="shot-booking.webp" alt="Booking form demo" width="1000" height="603" loading="lazy"><video muted loop playsinline preload="none" data-src="vid-booking.webm" aria-hidden="true"></video></div></div></a>
         <div class="pmeta"><div><h3>Booking and enquiry form</h3><p>Customers pick a date and time, and the owner gets the message.</p></div><span class="mono">Sample</span></div>
         <div class="ptags"><span>HTML</span><span>JavaScript</span><span>PHP</span><span>MySQL</span></div>
         <a class="demo" href="demo-booking.html">Try the live demo &#8599;</a>
@@ -327,7 +353,7 @@ footer{padding:clamp(70px,10vw,130px) var(--pad) 28px;display:flex;justify-conte
       </article>
 
       <article class="proj rv" style="--tint:#FF8CCB">
-        <div class="pan"><div class="frame"><div class="bar"><i></i><i></i><i></i><b>sample-shop.com/catalog</b></div><img src="shot-catalog.webp" alt="Product catalog demo" width="1000" height="603" loading="lazy"></div></div>
+        <a class="pan" href="demo-catalog.html" data-cur="Try live demo" aria-label="Open the catalog demo"><div class="frame"><div class="bar"><i></i><i></i><i></i><b>sample-shop.com/catalog</b></div><div class="vwrap"><img src="shot-catalog.webp" alt="Product catalog demo" width="1000" height="603" loading="lazy"><video muted loop playsinline preload="none" data-src="vid-catalog.webm" aria-hidden="true"></video></div></div></a>
         <div class="pmeta"><div><h3>Product catalog page</h3><p>A clean catalog with an Enquire button on each product.</p></div><span class="mono">Sample</span></div>
         <div class="ptags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
         <a class="demo" href="demo-catalog.html">Try the live demo &#8599;</a>
@@ -337,7 +363,7 @@ footer{padding:clamp(70px,10vw,130px) var(--pad) 28px;display:flex;justify-conte
       </article>
 
       <article class="proj rv" style="--tint:#F76FBE">
-        <div class="pan" aria-hidden="true"><div class="frame"><div class="mock">
+        <div class="pan" data-cur="Sample preview" aria-hidden="true"><div class="frame"><div class="mock">
           <div class="bar"><i></i><i></i><i></i><b>Order and stock tracker</b></div>
           <div class="body2">
             <table class="sheet">
@@ -364,7 +390,7 @@ footer{padding:clamp(70px,10vw,130px) var(--pad) 28px;display:flex;justify-conte
     <div class="grid2">
 
       <article class="proj rv" style="--tint:#FFB3DC">
-        <div class="pan" aria-hidden="true"><div class="frame"><div class="mock">
+        <div class="pan" data-cur="Sample preview" aria-hidden="true"><div class="frame"><div class="mock">
           <div class="bar"><i></i><i></i><i></i><b>tracked / parent dashboard</b></div>
           <div class="body2">
             <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px">
@@ -393,7 +419,7 @@ footer{padding:clamp(70px,10vw,130px) var(--pad) 28px;display:flex;justify-conte
       </article>
 
       <article class="proj rv" style="--tint:#FF94CF">
-        <div class="pan" aria-hidden="true"><div class="frame"><div class="mock">
+        <div class="pan" data-cur="Sample preview" aria-hidden="true"><div class="frame"><div class="mock">
           <div class="bar"><i></i><i></i><i></i><b>auditrix / dashboard</b></div>
           <div class="body2">
             <div class="kpis">
@@ -418,7 +444,7 @@ footer{padding:clamp(70px,10vw,130px) var(--pad) 28px;display:flex;justify-conte
       </article>
 
       <article class="proj rv" style="--tint:#F57AC0">
-        <div class="pan" aria-hidden="true"><div class="frame"><div class="mock">
+        <div class="pan" data-cur="Sample preview" aria-hidden="true"><div class="frame"><div class="mock">
           <div class="bar"><i></i><i></i><i></i><b>marketplace sync</b></div>
           <div class="body2">
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px">
@@ -509,26 +535,17 @@ footer{padding:clamp(70px,10vw,130px) var(--pad) 28px;display:flex;justify-conte
     </div>
   </section>
 
-  <section id="how">
-    <div class="head rv"><div class="mono">( How it works )</div><h2>Simple and clear.</h2></div>
-    <div class="steps">
-      <div class="rv"><div class="n">( 01 )</div><h3>Discuss</h3><p>Tell me your project and budget.</p></div>
-      <div class="rv"><div class="n">( 02 )</div><h3>Quotation</h3><p>A clear written quote with scope and price.</p></div>
-      <div class="rv"><div class="n">( 03 )</div><h3>Build</h3><p>You review a demo and ask for changes.</p></div>
-      <div class="rv"><div class="n">( 04 )</div><h3>Handover</h3><p>The site goes live, and you get the files and login.</p></div>
-    </div>
-  </section>
-
-  <section id="faq">
-    <div class="head rv"><div class="mono">( FAQ )</div><h2>Common questions.</h2></div>
-    <div class="faq">
-      <details class="rv"><summary><span class="n">( 01 )</span><span>How much does a project cost?</span></summary><p>It depends on what you need. Message me your project and budget on WhatsApp, and I'll recommend the best option with a written quotation.</p></details>
-      <details class="rv"><summary><span class="n">( 02 )</span><span>How long does it take?</span></summary><p>It depends on the size of the project and how quickly I receive your content. I give a clear timeline in the quotation before we start.</p></details>
-      <details class="rv"><summary><span class="n">( 03 )</span><span>How do payments work?</span></summary><p>All payment terms are written in the quotation, so both of us know what to expect. For projects, a deposit is paid before work starts and the balance on delivery.</p></details>
-      <details class="rv"><summary><span class="n">( 04 )</span><span>Will I own my website?</span></summary><p>Yes. After the final payment you get the files and login details.</p></details>
-      <details class="rv"><summary><span class="n">( 05 )</span><span>Can you host it and keep it running?</span></summary><p>Yes. I can set up hosting, your domain and HTTPS, and offer monthly maintenance if you want ongoing support.</p></details>
-      <details class="rv"><summary><span class="n">( 06 )</span><span>Do you help online sellers?</span></summary><p>Yes. I help with Shopee, Lazada, TikTok Shop and Shopify setup, bulk product upload, copying products between channels, and stock sync.</p></details>
-      <details class="rv"><summary><span class="n">( 07 )</span><span>What do you need from me to start?</span></summary><p>A short description of your business, what you want the site or tool to do, examples you like, and your logo and photos if you have them.</p></details>
+  <section id="how" class="steps-dark">
+    <div class="sw" id="sw">
+      <div class="sstage">
+        <div class="head"><div class="mono">( How it works )</div><h2>Simple and clear.</h2></div>
+        <div class="strack" id="strack">
+          <div class="scd"><svg class="art2" stroke="#5A6472" stroke-width="2" fill="none" viewBox="0 0 92 92" aria-hidden="true"><rect x="10" y="16" width="56" height="40" rx="10"/><path d="M24 56v14l16-14"/><rect x="40" y="40" width="42" height="30" rx="8" fill="#1A1F27"/></svg><span class="big">01</span><div><h3>Discuss</h3><p>Tell me your project and budget.</p></div></div>
+          <div class="scd"><svg class="art2" stroke="#5A6472" stroke-width="2" fill="none" viewBox="0 0 92 92" aria-hidden="true"><rect x="18" y="8" width="56" height="76" rx="8"/><path d="M30 28h32M30 42h32M30 56h18"/></svg><span class="big">02</span><div><h3>Quotation</h3><p>A clear written quote with scope and price.</p></div></div>
+          <div class="scd"><svg class="art2" stroke="#5A6472" stroke-width="2" fill="none" viewBox="0 0 92 92" aria-hidden="true"><rect x="8" y="14" width="76" height="56" rx="8"/><path d="M8 28h76M30 80h32M46 70v10"/></svg><span class="big">03</span><div><h3>Build</h3><p>You review a demo and ask for changes.</p></div></div>
+          <div class="scd"><svg class="art2" stroke="#5A6472" stroke-width="2" fill="none" viewBox="0 0 92 92" aria-hidden="true"><path d="M14 50l22 22L78 22"/><circle cx="46" cy="46" r="38"/></svg><span class="big">04</span><div><h3>Handover</h3><p>The site goes live, and you get the files and login.</p></div></div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -575,6 +592,8 @@ footer{padding:clamp(70px,10vw,130px) var(--pad) 28px;display:flex;justify-conte
 <footer><span>DigitalHelper</span><span>Sample projects use made-up businesses and sample data.</span></footer>
 
 <a class="fab" data-wa="" href="#contact" aria-label="Message me on WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.2 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l1.8.9c.3.1.5.2.5.3.1.2.1.8-.1 1.4z"/></svg>WhatsApp</a>
+
+<div class="cur" id="cur" aria-hidden="true"><span id="curT"></span></div>
 
 <script src="coins.js"></script>
 <script>
@@ -721,6 +740,54 @@ const FORM_URL = "";
     window.addEventListener('resize', upd);
     upd();
   }
+
+
+  /* ---------- cursor label over projects, and demo previews ---------- */
+  var cur = document.getElementById('cur'), curT = document.getElementById('curT');
+  var fine = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+  var cx = -200, cy = -200, tx = -200, ty = -200, cs = 0, ts = 0, raf = 0;
+  function curLoop() {
+    cx += (tx - cx) * 0.2; cy += (ty - cy) * 0.2; cs += (ts - cs) * 0.18;
+    cur.style.transform = 'translate3d(' + cx.toFixed(1) + 'px,' + cy.toFixed(1) + 'px,0) scale(' + cs.toFixed(3) + ')';
+    if (Math.abs(tx - cx) > 0.3 || Math.abs(ty - cy) > 0.3 || Math.abs(ts - cs) > 0.005) { raf = requestAnimationFrame(curLoop); } else { raf = 0; }
+  }
+  function kick() { if (!raf) { raf = requestAnimationFrame(curLoop); } }
+  document.querySelectorAll('.pan').forEach(function (pan) {
+    var v = pan.querySelector('video');
+    pan.addEventListener('mouseenter', function () {
+      if (fine && pan.dataset.cur) { curT.textContent = pan.dataset.cur; ts = 1; kick(); }
+      if (v && !reduce) {
+        if (!v.src) { v.src = v.getAttribute('data-src'); }
+        v.onplaying = function () { pan.classList.add('vok'); };
+        var pr = v.play(); if (pr && pr.catch) { pr.catch(function () {}); }
+        pan.classList.add('vplay');
+      }
+    });
+    pan.addEventListener('mouseleave', function () {
+      ts = 0; kick();
+      if (v) { pan.classList.remove('vplay'); pan.classList.remove('vok'); setTimeout(function () { if (!pan.classList.contains('vplay')) { v.pause(); v.currentTime = 0; } }, 320); }
+    });
+  });
+  if (fine) {
+    window.addEventListener('mousemove', function (e) { tx = e.clientX; ty = e.clientY; if (cs < 0.02) { cx = tx; cy = ty; } kick(); }, { passive: true });
+  }
+
+  /* ---------- how it works: black cards slide sideways ---------- */
+  var sdark = document.getElementById('how'), sw = document.getElementById('sw'), strack = document.getElementById('strack');
+  var mq = window.matchMedia('(max-width:760px)');
+  function stepsStatic() { return reduce || mq.matches; }
+  function updSteps() {
+    if (stepsStatic()) { sdark.classList.add('static'); strack.style.transform = ''; return; }
+    sdark.classList.remove('static');
+    var vh = window.innerHeight, top = sw.getBoundingClientRect().top;
+    var p = Math.min(1, Math.max(0, -top / (sw.offsetHeight - vh)));
+    var max = Math.max(0, strack.scrollWidth - window.innerWidth);
+    strack.style.transform = 'translate3d(' + (-p * max).toFixed(1) + 'px,0,0)';
+  }
+  var st = false;
+  window.addEventListener('scroll', function () { if (!st) { st = true; requestAnimationFrame(function () { st = false; updSteps(); }); } }, { passive: true });
+  window.addEventListener('resize', updSteps);
+  updSteps();
 
   /* ---------- Malaysia clock ---------- */
   var clock = document.getElementById('clock');
