@@ -195,21 +195,24 @@ a.pan{display:block;text-decoration:none;color:inherit}
 .cgrid{display:grid;grid-template-columns:1.7fr 1fr .9fr;gap:clamp(18px,3vw,48px);align-items:start}
 .wcol{min-width:0}
 .wbox{position:relative}
-#boxWa{aspect-ratio:4/1}
-#boxEm{aspect-ratio:2.3/1}
-.wlink{position:absolute;inset:0;display:block}
-.cbtns{display:flex;align-items:center;flex-wrap:wrap;gap:6px 18px;margin-top:clamp(14px,2vw,26px)}
-.cbtn{display:inline-flex;align-items:center;background:#0B1220;color:#fff;text-decoration:none;font-weight:600;font-size:clamp(15px,1.3vw,18px);padding:15px 28px;border-radius:999px;transition:background .2s,transform .2s}
-.cbtn:hover{background:#2A3242;transform:translateY(-2px)}
-.clink{background:none;border:0;padding:4px 2px;font:600 15px var(--sans);color:var(--ink);cursor:pointer;text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--line)}
+.wbtn{position:relative;display:block;text-decoration:none;color:inherit;padding:clamp(10px,1.3vw,18px) clamp(18px,3vw,40px)}
+.wbtn::before{content:"";position:absolute;inset:0;background:#0B1220;border-radius:999px;transition:background .2s}
+.wbtn:hover::before,.wbtn:focus-visible::before{background:#2A3242}
+.wbox{display:block;position:relative;z-index:2}
+#boxWa{aspect-ratio:3.21/1}
+#boxEm{aspect-ratio:2.84/1}
+.js .wbtn::before{opacity:0;transform:scale(.72,.5)}
+.js .wcol.done .wbtn::before{opacity:1;transform:none;transition:opacity .25s ease,transform .6s cubic-bezier(.3,1.5,.5,1),background .2s}
+.js .wcol:not(.done) .wbtn{pointer-events:none}
+.clink{display:inline-block;margin-top:16px;background:none;border:0;padding:4px 2px;font:600 15px var(--sans);color:var(--ink);cursor:pointer;text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--line)}
 .clink:hover{text-decoration-color:var(--ink)}
+.js .wcol:not(.done) .clink{opacity:0;pointer-events:none}
+.js .wcol.done .clink{opacity:1;transition:opacity .4s ease .35s}
+.penhit:focus-visible{outline:3px solid #0B1220;outline-offset:2px}
 .rest{min-height:300px}
-.js .cbtns>*{opacity:0;transform:translateY(14px) scale(.9);pointer-events:none}
-.js .wcol.done .cbtns>*{opacity:1;transform:none;pointer-events:auto;transition:opacity .35s ease,transform .6s cubic-bezier(.3,1.7,.5,1),background .2s}
-.js .wcol.done .cbtns>*:nth-child(2){transition-delay:.15s}
 .cwrite.fb .sr{position:static;width:auto;height:auto;clip:auto;font:italic 500 clamp(44px,8vw,100px)/1 Georgia,serif;display:block}
 @media (max-width:980px){.cgrid{grid-template-columns:1fr 1fr}.rest{grid-column:1/-1;min-height:230px}}
-@media (max-width:620px){.cgrid{grid-template-columns:1fr}#boxEm{width:60%}.rest{min-height:210px}}
+@media (max-width:620px){.cgrid{grid-template-columns:1fr;gap:26px}#colEm{width:68%}.rest{min-height:210px}}
 @media (prefers-reduced-motion:reduce){.js .cbtns>*{transition:none}}
 
 /* about */
@@ -582,17 +585,16 @@ footer{background:#fff;padding:clamp(50px,7vw,90px) var(--pad) 28px;display:flex
     <div class="cwrite" id="cwrite">
       <div class="cgrid">
         <div class="wcol" id="colWa">
-          <div class="wbox" id="boxWa"><a class="wlink wadyn" href="#contact" tabindex="-1" aria-hidden="true"></a><span class="sr">WhatsApp</span></div>
-          <div class="cbtns"><a class="cbtn wadyn" id="next" href="#contact">Message me on WhatsApp &#8599;</a></div>
+          <a class="wbtn wadyn" id="next" href="#contact"><span class="wbox" id="boxWa"></span><span class="sr">Message me on WhatsApp</span></a>
         </div>
         <div class="wcol" id="colEm">
-          <div class="wbox" id="boxEm"><a class="wlink" data-mail href="#contact" tabindex="-1" aria-hidden="true"></a><span class="sr">Email</span></div>
-          <div class="cbtns"><a class="cbtn" data-mail href="#contact">Email me &#8599;</a><button class="clink" id="copyMail" type="button">Copy email</button></div>
+          <a class="wbtn" data-mail href="#contact"><span class="wbox" id="boxEm"></span><span class="sr">Email me</span></a>
+          <button class="clink" id="copyMail" type="button">Copy email</button>
         </div>
         <div class="rest" id="rest"></div>
       </div>
     </div>
-    <p class="info rv">Prices on request. Message me your project and budget for a written quote. <button class="clink" id="again" type="button" hidden>Watch it written again</button></p>
+    <p class="info rv">Prices on request. Message me your project and budget for a written quote.</p>
     <form class="form" id="contactForm" hidden novalidate>
       <h3>Or send your project details here</h3>
       <div class="two">
@@ -824,7 +826,6 @@ const FORM_URL = "";
   /* ---------- contact: a pen writes WhatsApp and Email ---------- */
   var cwrite = document.getElementById('cwrite');
   var colWa = document.getElementById('colWa'), colEm = document.getElementById('colEm');
-  var again = document.getElementById('again');
   function rel(el) { var a = el.getBoundingClientRect(), b = cwrite.getBoundingClientRect(); return { x: a.left - b.left, y: a.top - b.top, w: a.width, h: a.height }; }
   var pen = null;
   try {
@@ -832,12 +833,12 @@ const FORM_URL = "";
       pen = DHCoins.createPen({
         stage: cwrite,
         words: [
-          { key: 'WhatsApp', box: function () { return rel(document.getElementById('boxWa')); } },
+          { key: 'Whatsapp', box: function () { return rel(document.getElementById('boxWa')); } },
           { key: 'Email', box: function () { return rel(document.getElementById('boxEm')); } }
         ],
         getRest: function () { return rel(document.getElementById('rest')); },
         onWordDone: function (i) { (i ? colEm : colWa).classList.add('done'); },
-        onDone: function () { again.hidden = false; }
+        onReset: function () { colWa.classList.remove('done'); colEm.classList.remove('done'); }
       });
     }
   } catch (e) { pen = null; }
@@ -851,7 +852,6 @@ const FORM_URL = "";
       }, { threshold: 0.35 });
       pio.observe(document.querySelector('.cgrid'));
     } else { pen.play(); }
-    again.addEventListener('click', function () { again.hidden = true; pen.replay(); });
   }
 
   /* ---------- Malaysia clock ---------- */
