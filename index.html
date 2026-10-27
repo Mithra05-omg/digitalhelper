@@ -75,6 +75,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #FF
 
 /* sections */
 section{padding:clamp(70px,11vw,140px) 0 0}
+section.contact{padding-top:clamp(80px,12vw,160px)}
 .head{display:grid;grid-template-columns:200px 1fr;gap:20px;align-items:start;padding:0 var(--pad)}
 .head .mono{color:var(--muted);padding-top:12px}
 h2{font-size:clamp(38px,7.2vw,116px);font-weight:500;letter-spacing:-.035em;line-height:.98}
@@ -187,6 +188,30 @@ a.pan{display:block;text-decoration:none;color:inherit}
 .steps-dark.static .strack{width:auto;flex-direction:column}
 .steps-dark.static .scd{width:100%;height:auto;min-height:220px;gap:30px}
 
+
+/* contact: the pen writes */
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.cwrite{position:relative;padding:clamp(120px,17vw,250px) var(--pad) 0;margin:clamp(10px,2vw,30px) calc(-1 * var(--pad)) 0}
+.cgrid{display:grid;grid-template-columns:1.7fr 1fr .9fr;gap:clamp(18px,3vw,48px);align-items:start}
+.wcol{min-width:0}
+.wbox{position:relative}
+#boxWa{aspect-ratio:4/1}
+#boxEm{aspect-ratio:2.3/1}
+.wlink{position:absolute;inset:0;display:block}
+.cbtns{display:flex;align-items:center;flex-wrap:wrap;gap:6px 18px;margin-top:clamp(14px,2vw,26px)}
+.cbtn{display:inline-flex;align-items:center;background:#0B1220;color:#fff;text-decoration:none;font-weight:600;font-size:clamp(15px,1.3vw,18px);padding:15px 28px;border-radius:999px;transition:background .2s,transform .2s}
+.cbtn:hover{background:#2A3242;transform:translateY(-2px)}
+.clink{background:none;border:0;padding:4px 2px;font:600 15px var(--sans);color:var(--ink);cursor:pointer;text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--line)}
+.clink:hover{text-decoration-color:var(--ink)}
+.rest{min-height:300px}
+.js .cbtns>*{opacity:0;transform:translateY(14px) scale(.9);pointer-events:none}
+.js .wcol.done .cbtns>*{opacity:1;transform:none;pointer-events:auto;transition:opacity .35s ease,transform .6s cubic-bezier(.3,1.7,.5,1),background .2s}
+.js .wcol.done .cbtns>*:nth-child(2){transition-delay:.15s}
+.cwrite.fb .sr{position:static;width:auto;height:auto;clip:auto;font:italic 500 clamp(44px,8vw,100px)/1 Georgia,serif;display:block}
+@media (max-width:980px){.cgrid{grid-template-columns:1fr 1fr}.rest{grid-column:1/-1;min-height:230px}}
+@media (max-width:620px){.cgrid{grid-template-columns:1fr}#boxEm{width:60%}.rest{min-height:210px}}
+@media (prefers-reduced-motion:reduce){.js .cbtns>*{transition:none}}
+
 /* about */
 .about{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(24px,5vw,80px);padding:clamp(40px,6vw,80px) var(--pad) 0;align-items:center}
 .portrait{position:relative;background:var(--pink);border-radius:26px;aspect-ratio:1/1.05;overflow:hidden}
@@ -221,7 +246,7 @@ a.pan{display:block;text-decoration:none;color:inherit}
 .faq details p{padding:0 0 26px 220px;color:var(--muted);max-width:calc(62ch + 220px);font-size:16.5px}
 
 /* contact */
-.contact{padding:clamp(80px,12vw,160px) var(--pad) 0}
+.contact{padding:clamp(80px,12vw,160px) var(--pad) 0;background:#fff;border-radius:26px 26px 0 0;margin-top:clamp(70px,11vw,140px)}
 .contact h2{font-size:clamp(46px,10.5vw,176px);max-width:11ch}
 .pick{margin-top:clamp(28px,4vw,50px);display:flex;flex-wrap:wrap;gap:10px;align-items:center}
 .pick .lab{font-family:var(--mono);font-size:13px;text-transform:uppercase;color:var(--muted);margin-right:6px}
@@ -241,7 +266,7 @@ a.pan{display:block;text-decoration:none;color:inherit}
 .form .status{min-height:22px;font-size:15px}
 .form .status.ok{color:#166534}
 .form .status.bad{color:#B91C1C}
-footer{padding:clamp(70px,10vw,130px) var(--pad) 28px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;color:var(--muted);font-size:13px}
+footer{background:#fff;padding:clamp(50px,7vw,90px) var(--pad) 28px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;color:var(--muted);font-size:13px}
 .fab{position:fixed;right:14px;bottom:14px;z-index:40;display:none;align-items:center;gap:8px;background:var(--green);color:#fff;text-decoration:none;font-weight:600;padding:12px 18px;border-radius:999px;box-shadow:0 8px 20px rgba(0,0,0,.25)}
 .fab svg{width:20px;height:20px;fill:currentColor}
 
@@ -527,10 +552,6 @@ footer{padding:clamp(70px,10vw,130px) var(--pad) 28px;display:flex;justify-conte
         <h2>Hi, I'm Mithra.</h2>
         <p>I'm an IT student in Malaysia, and I build websites and set up online stores for small businesses. I like simple, clear work: you tell me what you need, I send a written quote, and you get a site that works well on phones and is easy to run. I also help with Excel and Google Sheets, and with putting your site online.</p>
         <div class="facts"><span>Based in Negeri Sembilan</span><span>Clients across Malaysia</span></div>
-        <div class="btnrow">
-          <a class="btn fill" data-wa="" href="#contact"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.2 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l1.8.9c.3.1.5.2.5.3.1.2.1.8-.1 1.4z"/></svg>WhatsApp me</a>
-          <a class="btn" data-mail href="#contact">Email me</a>
-        </div>
       </div>
     </div>
   </section>
@@ -558,12 +579,20 @@ footer{padding:clamp(70px,10vw,130px) var(--pad) 28px;display:flex;justify-conte
       <button class="opt" type="button" aria-pressed="false" data-v="help with Excel or Google Sheets">Sheets</button>
       <button class="opt" type="button" aria-pressed="false" data-v="hosting and server setup">Hosting</button>
     </div>
-    <div class="btnrow rv">
-      <a class="btn fill" id="next" data-wa="" href="#contact"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.2 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l1.8.9c.3.1.5.2.5.3.1.2.1.8-.1 1.4z"/></svg>Next: WhatsApp me</a>
-      <a class="btn" data-mail href="#contact">Email me</a>
-      <button class="btn" id="copyMail" type="button">Copy email</button>
+    <div class="cwrite" id="cwrite">
+      <div class="cgrid">
+        <div class="wcol" id="colWa">
+          <div class="wbox" id="boxWa"><a class="wlink wadyn" href="#contact" tabindex="-1" aria-hidden="true"></a><span class="sr">WhatsApp</span></div>
+          <div class="cbtns"><a class="cbtn wadyn" id="next" href="#contact">Message me on WhatsApp &#8599;</a></div>
+        </div>
+        <div class="wcol" id="colEm">
+          <div class="wbox" id="boxEm"><a class="wlink" data-mail href="#contact" tabindex="-1" aria-hidden="true"></a><span class="sr">Email</span></div>
+          <div class="cbtns"><a class="cbtn" data-mail href="#contact">Email me &#8599;</a><button class="clink" id="copyMail" type="button">Copy email</button></div>
+        </div>
+        <div class="rest" id="rest"></div>
+      </div>
     </div>
-    <p class="info rv">Prices on request. Message me your project and budget for a written quote.</p>
+    <p class="info rv">Prices on request. Message me your project and budget for a written quote. <button class="clink" id="again" type="button" hidden>Watch it written again</button></p>
     <form class="form" id="contactForm" hidden novalidate>
       <h3>Or send your project details here</h3>
       <div class="two">
@@ -616,16 +645,18 @@ const FORM_URL = "";
     a.href = waLink(t ? 'Hi Mithra, ' + t : '');
     a.target = '_blank'; a.rel = 'noopener noreferrer';
   });
+  document.querySelectorAll('.wadyn').forEach(function (a) { a.href = waLink(''); a.target = '_blank'; a.rel = 'noopener noreferrer'; });
   document.querySelectorAll('[data-mail]').forEach(function (a) {
     a.href = 'mailto:' + EMAIL + '?subject=' + encodeURIComponent('Project enquiry');
   });
 
   /* "I need" picker */
-  var pick = document.getElementById('pick'), next = document.getElementById('next');
+  var pick = document.getElementById('pick');
   pick.addEventListener('click', function (e) {
     var b = e.target.closest('button.opt'); if (!b) { return; }
     pick.querySelectorAll('.opt').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
-    next.href = waLink("Hi Mithra, I need " + b.getAttribute('data-v') + ". My budget is about RM ___.");
+    var href = waLink("Hi Mithra, I need " + b.getAttribute('data-v') + ". My budget is about RM ___.");
+    document.querySelectorAll('.wadyn').forEach(function (a) { a.href = href; a.target = '_blank'; a.rel = 'noopener noreferrer'; });
   });
   var copy = document.getElementById('copyMail');
   copy.addEventListener('click', function () {
@@ -788,6 +819,40 @@ const FORM_URL = "";
   window.addEventListener('scroll', function () { if (!st) { st = true; requestAnimationFrame(function () { st = false; updSteps(); }); } }, { passive: true });
   window.addEventListener('resize', updSteps);
   updSteps();
+
+
+  /* ---------- contact: a pen writes WhatsApp and Email ---------- */
+  var cwrite = document.getElementById('cwrite');
+  var colWa = document.getElementById('colWa'), colEm = document.getElementById('colEm');
+  var again = document.getElementById('again');
+  function rel(el) { var a = el.getBoundingClientRect(), b = cwrite.getBoundingClientRect(); return { x: a.left - b.left, y: a.top - b.top, w: a.width, h: a.height }; }
+  var pen = null;
+  try {
+    if (window.DHCoins && DHCoins.createPen) {
+      pen = DHCoins.createPen({
+        stage: cwrite,
+        words: [
+          { key: 'WhatsApp', box: function () { return rel(document.getElementById('boxWa')); } },
+          { key: 'Email', box: function () { return rel(document.getElementById('boxEm')); } }
+        ],
+        getRest: function () { return rel(document.getElementById('rest')); },
+        onWordDone: function (i) { (i ? colEm : colWa).classList.add('done'); },
+        onDone: function () { again.hidden = false; }
+      });
+    }
+  } catch (e) { pen = null; }
+  if (!pen) { cwrite.classList.add('fb'); colWa.classList.add('done'); colEm.classList.add('done'); }
+  else {
+    if (location.hash === '#debugpen') { window.__pen = pen; }
+    if (reduce) { pen.showNow(); }
+    else if ('IntersectionObserver' in window) {
+      var pio = new IntersectionObserver(function (en) {
+        if (en[0].isIntersecting) { pio.disconnect(); pen.play(); }
+      }, { threshold: 0.35 });
+      pio.observe(document.querySelector('.cgrid'));
+    } else { pen.play(); }
+    again.addEventListener('click', function () { again.hidden = true; pen.replay(); });
+  }
 
   /* ---------- Malaysia clock ---------- */
   var clock = document.getElementById('clock');
