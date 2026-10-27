@@ -192,27 +192,26 @@ a.pan{display:block;text-decoration:none;color:inherit}
 /* contact: the pen writes */
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .cwrite{position:relative;padding:clamp(120px,17vw,250px) var(--pad) 0;margin:clamp(10px,2vw,30px) calc(-1 * var(--pad)) 0}
-.cgrid{display:grid;grid-template-columns:1.7fr 1fr .9fr;gap:clamp(18px,3vw,48px);align-items:start}
-.wcol{min-width:0}
-.wbox{position:relative}
-.wbtn{position:relative;display:block;text-decoration:none;color:inherit;padding:clamp(10px,1.3vw,18px) clamp(18px,3vw,40px)}
-.wbtn::before{content:"";position:absolute;inset:0;background:#0B1220;border-radius:999px;transition:background .2s}
-.wbtn:hover::before,.wbtn:focus-visible::before{background:#2A3242}
-.wbox{display:block;position:relative;z-index:2}
-#boxWa{aspect-ratio:3.21/1}
-#boxEm{aspect-ratio:2.84/1}
-.js .wbtn::before{opacity:0;transform:scale(.72,.5)}
-.js .wcol.done .wbtn::before{opacity:1;transform:none;transition:opacity .25s ease,transform .6s cubic-bezier(.3,1.5,.5,1),background .2s}
-.js .wcol:not(.done) .wbtn{pointer-events:none}
-.clink{display:inline-block;margin-top:16px;background:none;border:0;padding:4px 2px;font:600 15px var(--sans);color:var(--ink);cursor:pointer;text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--line)}
+.cwrite{--bh:50px}
+.cgrid{display:grid;grid-template-columns:auto 1fr minmax(280px,420px);gap:clamp(18px,3vw,48px);align-items:center;min-height:170px}
+.slots{display:flex;flex-wrap:wrap;gap:14px;align-content:flex-start}
+.slot{display:block;height:calc(var(--bh) + 20px)}
+#slotWa{width:calc(var(--bh) * 3.21 + 48px)}
+#slotEm{width:calc(var(--bh) * 2.84 + 48px)}
+.wzone{min-height:120px}
+.wbtn{position:absolute;display:block;text-decoration:none;color:inherit;z-index:0;pointer-events:none;--m:0}
+.wbtn::before{content:"";position:absolute;inset:0;background:#0B1220;border-radius:999px;opacity:var(--m);transform:scale(calc(.55 + .45 * var(--m)),calc(.3 + .7 * var(--m)))}
+.wbtn.live{pointer-events:auto;cursor:pointer}
+.wbtn.live:hover::before,.wbtn.live:focus-visible::before{background:#2A3242}
+.clink{flex-basis:100%;text-align:left;justify-content:flex-start;background:none;border:0;padding:4px 2px;margin-top:6px;font:600 15px var(--sans);color:var(--ink);cursor:pointer;text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--line);width:max-content}
 .clink:hover{text-decoration-color:var(--ink)}
-.js .wcol:not(.done) .clink{opacity:0;pointer-events:none}
-.js .wcol.done .clink{opacity:1;transition:opacity .4s ease .35s}
+.js .clink{opacity:0;pointer-events:none}
+.js .slots.done .clink{opacity:1;pointer-events:auto;transition:opacity .4s ease .3s}
 .penhit:focus-visible{outline:3px solid #0B1220;outline-offset:2px}
-.rest{min-height:300px}
-.cwrite.fb .sr{position:static;width:auto;height:auto;clip:auto;font:italic 500 clamp(44px,8vw,100px)/1 Georgia,serif;display:block}
-@media (max-width:980px){.cgrid{grid-template-columns:1fr 1fr}.rest{grid-column:1/-1;min-height:230px}}
-@media (max-width:620px){.cgrid{grid-template-columns:1fr;gap:26px}#colEm{width:68%}.rest{min-height:210px}}
+.rest{min-height:200px}
+.cwrite.fb .wbtn{position:relative;display:inline-block;pointer-events:auto;--m:1;margin:0 10px 10px 0;padding:14px 26px}.cwrite.fb .wbtn .sr{position:relative;width:auto;height:auto;clip:auto;color:#fff;font:600 16px var(--sans);display:block}.cwrite.fb .slot,.cwrite.fb .rest{display:none}
+@media (max-width:980px){.cgrid{grid-template-columns:auto 1fr}.rest{grid-column:1/-1;min-height:200px}}
+@media (max-width:620px){.cwrite{--bh:40px}.cgrid{grid-template-columns:1fr;gap:10px}.wzone{min-height:110px}.rest{min-height:200px}}
 @media (prefers-reduced-motion:reduce){.js .cbtns>*{transition:none}}
 
 /* about */
@@ -584,15 +583,15 @@ footer{background:#fff;padding:clamp(50px,7vw,90px) var(--pad) 28px;display:flex
     </div>
     <div class="cwrite" id="cwrite">
       <div class="cgrid">
-        <div class="wcol" id="colWa">
-          <a class="wbtn wadyn" id="next" href="#contact"><span class="wbox" id="boxWa"></span><span class="sr">Message me on WhatsApp</span></a>
-        </div>
-        <div class="wcol" id="colEm">
-          <a class="wbtn" data-mail href="#contact"><span class="wbox" id="boxEm"></span><span class="sr">Email me</span></a>
+        <div class="slots" id="slots">
+          <span class="slot" id="slotWa"></span><span class="slot" id="slotEm"></span>
           <button class="clink" id="copyMail" type="button">Copy email</button>
         </div>
+        <div class="wzone" id="wzone"></div>
         <div class="rest" id="rest"></div>
       </div>
+      <a class="wbtn wadyn" id="btnWa" href="#contact"><span class="sr">Message me on WhatsApp</span></a>
+      <a class="wbtn" id="btnEm" data-mail href="#contact"><span class="sr">Email me</span></a>
     </div>
     <p class="info rv">Prices on request. Message me your project and budget for a written quote.</p>
     <form class="form" id="contactForm" hidden novalidate>
@@ -825,24 +824,26 @@ const FORM_URL = "";
 
   /* ---------- contact: a pen writes WhatsApp and Email ---------- */
   var cwrite = document.getElementById('cwrite');
-  var colWa = document.getElementById('colWa'), colEm = document.getElementById('colEm');
+  var slots = document.getElementById('slots');
+  var btnWa = document.getElementById('btnWa'), btnEm = document.getElementById('btnEm');
   function rel(el) { var a = el.getBoundingClientRect(), b = cwrite.getBoundingClientRect(); return { x: a.left - b.left, y: a.top - b.top, w: a.width, h: a.height }; }
   var pen = null;
   try {
     if (window.DHCoins && DHCoins.createPen) {
       pen = DHCoins.createPen({
         stage: cwrite,
+        zone: function () { return rel(document.getElementById('wzone')); },
         words: [
-          { key: 'Whatsapp', box: function () { return rel(document.getElementById('boxWa')); } },
-          { key: 'Email', box: function () { return rel(document.getElementById('boxEm')); } }
+          { key: 'Whatsapp', slot: function () { return rel(document.getElementById('slotWa')); }, pill: btnWa, inset: { x: 24, y: 10 } },
+          { key: 'Email', slot: function () { return rel(document.getElementById('slotEm')); }, pill: btnEm, inset: { x: 24, y: 10 } }
         ],
         getRest: function () { return rel(document.getElementById('rest')); },
-        onWordDone: function (i) { (i ? colEm : colWa).classList.add('done'); },
-        onReset: function () { colWa.classList.remove('done'); colEm.classList.remove('done'); }
+        onWordDone: function (i) { if (!i) { slots.classList.add('done'); } },
+        onReset: function () { slots.classList.remove('done'); }
       });
     }
   } catch (e) { pen = null; }
-  if (!pen) { cwrite.classList.add('fb'); colWa.classList.add('done'); colEm.classList.add('done'); }
+  if (!pen) { cwrite.classList.add('fb'); slots.classList.add('done'); }
   else {
     if (location.hash === '#debugpen') { window.__pen = pen; }
     if (reduce) { pen.showNow(); }
