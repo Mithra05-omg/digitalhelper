@@ -7,54 +7,71 @@
 <meta name="robots" content="noindex">
 <style>
 *{box-sizing:border-box}
-html,body{margin:0;height:100%;background:#fff;font-family:system-ui,-apple-system,Segoe UI,Arial,sans-serif}
-.panel{position:relative;height:calc(100svh - 28px);margin:14px;border-radius:22px;background:#ff2a5c;overflow:hidden;touch-action:pan-y}
-.screen{position:absolute;left:6%;top:22%;width:34%;aspect-ratio:16/10;border-radius:14px;background:#161d25;border:10px solid #0b1016;box-shadow:0 30px 60px rgba(90,0,25,.35);display:grid;place-items:center;color:#7d8b99;font-size:14px}
-.base{position:absolute;left:3%;width:40%;top:calc(22% + 34vw * 0.625 + 20px);height:14px;border-radius:0 0 18px 18px;background:#0b1016}
-.title{position:absolute;left:24px;top:18px;color:#fff;font-size:14px;letter-spacing:.04em;text-transform:uppercase}
-#stage{position:absolute;inset:0}
-button{position:absolute;right:20px;top:14px;z-index:5;border:0;border-radius:999px;padding:10px 18px;font:600 14px system-ui,sans-serif;background:#fff;color:#161d25;cursor:pointer}
-.note{position:absolute;left:24px;bottom:16px;color:#fff;font-size:13px;opacity:.85;z-index:5}
-.fallback{position:absolute;inset:0;display:none;place-items:center;color:#fff;text-align:center;padding:30px;z-index:4}
-@media (max-width:700px){
-  .screen{left:8%;top:14%;width:84%}
-  .base{display:none}
-}
+html,body{margin:0;background:#F5F4F0;font-family:system-ui,-apple-system,Segoe UI,Arial,sans-serif;color:#0B1220;overflow-x:hidden}
+.hero{position:relative;min-height:100svh;padding-top:70px}
+.lap{width:min(1086px,90vw);margin:0 auto;position:relative;z-index:1}
+.lap img{display:block;width:100%;height:auto}
+#stage{position:absolute;inset:0;z-index:2;pointer-events:none}
+#stage canvas{pointer-events:none}
+.tag{position:absolute;left:20px;top:16px;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:#5B6270;z-index:3}
+button{position:fixed;right:18px;top:12px;z-index:5;border:0;border-radius:999px;padding:10px 18px;font:600 14px system-ui,sans-serif;background:#0B1220;color:#fff;cursor:pointer}
+.fallback{display:none;position:absolute;left:0;right:0;bottom:20px;text-align:center;color:#5B6270;z-index:4}
+@media (max-width:760px){ .hero{padding-bottom:150px} }
 </style>
 </head>
 <body>
-<div class="panel" id="panel">
-  <div class="title">Coin test, not the final page</div>
-  <div class="screen" id="screen">your demo screenshot goes here</div>
-  <div class="base"></div>
+<div class="hero" id="hero">
+  <div class="tag">Coin test, not the final page</div>
+  <div class="lap" id="lap"><img id="img" src="laptop.webp" width="1500" height="971" alt="Laptop"></div>
   <div id="stage"></div>
-  <div class="fallback" id="fb">Your browser cannot show 3D. The real page will show a flat version.</div>
+  <div class="fallback" id="fb">Your browser cannot show 3D. The real page will show flat coins.</div>
   <button id="again" type="button">Play again</button>
-  <div class="note">Move your mouse or finger across the coins to push them.</div>
 </div>
 <script src="coins.js"></script>
 <script>
 (function () {
+  var hero = document.getElementById('hero');
   var stage = document.getElementById('stage');
-  var screen = document.getElementById('screen');
+  var lap = document.getElementById('lap');
+  var img = document.getElementById('img');
+
+  /* Slide the laptop left only when the right side is too narrow for four coins. */
+  function fit(r) {
+    lap.style.transform = '';
+    var vw = hero.clientWidth;
+    if (vw < 760) { return; }
+    var box = lap.getBoundingClientRect();
+    var need = 8 * r + 3 * r * 0.12 + r * 2.2 + 18;
+    var room = vw - box.right;
+    if (room < need) {
+      var shift = Math.min(need - room, box.left - 12);
+      lap.style.transform = 'translateX(' + (-shift) + 'px)';
+    }
+  }
+
   var coins = DHCoins.startCoins({
     stage: stage,
     letters: ['N', 'E', 'X', 'T'],
-    getFrom: function () {
-      var s = screen.getBoundingClientRect(), p = stage.getBoundingClientRect();
-      return { x: s.left - p.left + s.width / 2, y: s.top - p.top + s.height / 2 };
-    },
-    getRow: function (w, h) {
-      var small = w < 700;
-      var r = Math.max(34, Math.min(small ? 52 : 92, w * (small ? 0.12 : 0.058)));
-      if (small) { return { x0: w * 0.14 + 0, x1: w * 0.86, floor: h * 0.80, r: r }; }
-      return { x0: w * 0.52, x1: w * 0.92, floor: h * 0.86, r: r };
+    getLayout: function (w, h) {
+      var small = w < 760;
+      var r = small ? Math.min(34, (w - 36) / 8.6) : Math.max(26, Math.min(36, w * 0.019));
+      fit(r);
+      var pr = hero.getBoundingClientRect();
+      var b = img.getBoundingClientRect();
+      if (small) {
+        return { r: r, floor: b.bottom - pr.top + 2 * r + 24, wall: 18 };
+      }
+      return { r: r, floor: b.top - pr.top + b.height * 0.80, wall: b.right - pr.left - b.width * 0.012 };
     }
   });
-  if (!coins) { document.getElementById('fb').style.display = 'grid'; return; }
-  setTimeout(function () { coins.play(); }, 400);
-  document.getElementById('again').addEventListener('click', function () { coins.play(); });
-  window.__coins = coins;
+  if (!coins) { document.getElementById('fb').style.display = 'block'; return; }
+  function go() { coins.play(); }
+  if (img.complete) { setTimeout(go, 500); } else { img.addEventListener('load', function () { setTimeout(go, 500); }); }
+  document.getElementById('again').addEventListener('click', go);
+  window.addEventListener('pointermove', function (e) {
+    var r = stage.getBoundingClientRect();
+    stage.dispatchEvent(new PointerEvent('pointermove', { clientX: e.clientX, clientY: e.clientY }));
+  }, { passive: true });
 })();
 </script>
 </body>
