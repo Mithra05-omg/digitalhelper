@@ -172,23 +172,25 @@ dd{margin:0;font-size:15px}
 a.pan{display:block;text-decoration:none;color:inherit}
 
 /* steps: black band, cards slide sideways */
-.steps-dark{background:var(--black);color:#fff;margin-top:clamp(70px,11vw,140px);padding:0}
-.steps-dark .head .mono{color:#8C95A3}
-.sw{height:380svh;position:relative}
-.sstage{position:sticky;top:0;height:100svh;overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:clamp(24px,5vh,56px)}
-.sstage .head{padding-top:70px}
-.strack{display:flex;gap:clamp(16px,2vw,28px);padding:0 var(--pad);width:max-content;will-change:transform}
-.scd{flex:none;width:clamp(420px,36vw,680px);height:min(52svh,460px);background:#1A1F27;border:1px solid #2A313C;border-radius:26px;padding:clamp(20px,2.4vw,34px);display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
-.scd .big{font-size:clamp(70px,9vw,130px);font-weight:500;letter-spacing:-.05em;line-height:.9;color:var(--pink)}
-.scd h3{font-size:clamp(28px,3vw,42px);font-weight:500;letter-spacing:-.03em;margin-bottom:8px}
-.scd p{color:#A6AEBB;font-size:16.5px;max-width:28ch}
-.scd .art2{position:absolute;right:16px;top:16px;width:92px;height:auto;opacity:.9}
-.sprog{margin:0 var(--pad);height:3px;background:#2A313C;border-radius:3px;overflow:hidden}.sprog i{display:block;height:100%;width:100%;background:var(--pink);transform-origin:left;transform:scaleX(0)}
-.steps-dark.static .sprog{display:none}
-.steps-dark.static .sw{height:auto;padding-bottom:70px}
-.steps-dark.static .sstage{position:static;height:auto;overflow:visible}
-.steps-dark.static .strack{width:auto;flex-direction:column}
-.steps-dark.static .scd{width:100%;height:auto;min-height:220px;gap:30px}
+.how{background:#F2EBE0;margin-top:clamp(70px,11vw,140px);padding:clamp(80px,11vw,150px) 0 clamp(60px,9vw,120px);overflow:hidden}
+.pathwrap{container-type:inline-size;position:relative;width:min(100%,1400px);margin:clamp(20px,4vw,50px) auto 0}
+.pathwrap svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+#pbase{stroke:#E91E8C;opacity:.16}
+#pline{stroke:#E91E8C}
+#ptip{fill:#E91E8C;stroke:#fff;stroke-width:4}
+.stop{position:absolute;display:block;width:max-content;max-width:min(440px,46%);z-index:2}
+.stop .stk{display:block;width:clamp(54px,6.4cqw,90px);height:clamp(54px,6.4cqw,90px);border-radius:22%;background:#FFD0E6;border:2px solid var(--ink);padding:14%;margin-bottom:10px;transform:rotate(-6deg)}
+.stop .stk svg{display:block;width:100%;height:100%;stroke:var(--ink);stroke-width:2.4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.stop .tt{display:block;overflow:hidden;padding-bottom:.08em}
+.stop h3{font-size:clamp(36px,6.2cqw,88px);font-weight:500;letter-spacing:-.045em;line-height:1;color:var(--pink);display:flex;align-items:baseline;gap:.25em}
+.stop h3 small{font:500 13px var(--mono);letter-spacing:.04em;color:var(--ink);transform:translateY(-1.4em)}
+.stop .bub{display:inline-block;margin-top:12px;background:#fff;border:2px solid var(--pink);border-radius:20px;padding:10px 16px;font-size:clamp(14px,1.25cqw,17px);line-height:1.35;max-width:26ch;transform:rotate(-2.5deg);color:var(--ink)}
+.stop.r{text-align:left}
+@media (max-width:760px){.stop h3{font-size:clamp(30px,11.5cqw,52px)}.stop .stk{width:54px;height:54px}.stop .bub{font-size:14px}}
+.stop.l{text-align:right}.stop.l h3{justify-content:flex-end}
+.js .stop .stk,.js .stop .bub{opacity:0}
+.stop.on .stk,.stop.on .bub{opacity:1}
+.nd{fill:#F2EBE0;stroke:#E91E8C;stroke-width:6;opacity:0}
 
 
 /* contact: the pen writes */
@@ -324,6 +326,7 @@ footer{background:#FFD9EC;padding:clamp(40px,6vw,80px) var(--pad) 0;color:var(--
   .needwrap{height:auto}.needstage{position:static;height:auto}.js .hl,.js .hl .l,.js .fade,.js .lapin,.js .rv{transition:none;opacity:1;transform:none;color:var(--ink)}
   .js .hl{width:100%}
 }
+html.lenis,html.lenis body{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!important}.lenis.lenis-stopped{overflow:hidden}
 </style>
 </head>
 <body>
@@ -577,18 +580,18 @@ footer{background:#FFD9EC;padding:clamp(40px,6vw,80px) var(--pad) 0;color:var(--
     </div>
   </section>
 
-  <section id="how" class="steps-dark">
-    <div class="sw" id="sw">
-      <div class="sstage">
-        <div class="head"><div class="mono">( How it works )</div><h2>Simple and clear.</h2></div>
-        <div class="strack" id="strack">
-          <div class="scd"><svg class="art2" stroke="#5A6472" stroke-width="2" fill="none" viewBox="0 0 92 92" aria-hidden="true"><rect x="10" y="16" width="56" height="40" rx="10"/><path d="M24 56v14l16-14"/><rect x="40" y="40" width="42" height="30" rx="8" fill="#1A1F27"/></svg><span class="big">01</span><div><h3>Discuss</h3><p>Tell me your project and budget.</p></div></div>
-          <div class="scd"><svg class="art2" stroke="#5A6472" stroke-width="2" fill="none" viewBox="0 0 92 92" aria-hidden="true"><rect x="18" y="8" width="56" height="76" rx="8"/><path d="M30 28h32M30 42h32M30 56h18"/></svg><span class="big">02</span><div><h3>Quotation</h3><p>A clear written quote with scope and price.</p></div></div>
-          <div class="scd"><svg class="art2" stroke="#5A6472" stroke-width="2" fill="none" viewBox="0 0 92 92" aria-hidden="true"><rect x="8" y="14" width="76" height="56" rx="8"/><path d="M8 28h76M30 80h32M46 70v10"/></svg><span class="big">03</span><div><h3>Build</h3><p>You review a demo and ask for changes.</p></div></div>
-          <div class="scd"><svg class="art2" stroke="#5A6472" stroke-width="2" fill="none" viewBox="0 0 92 92" aria-hidden="true"><path d="M14 50l22 22L78 22"/><circle cx="46" cy="46" r="38"/></svg><span class="big">04</span><div><h3>Handover</h3><p>The site goes live, and you get the files and login.</p></div></div>
-        </div>
-        <div class="sprog" aria-hidden="true"><i id="sprog"></i></div>
-      </div>
+  <section id="how" class="how">
+    <div class="head rv"><div class="mono">( How it works )</div><h2>Simple and clear.</h2></div>
+    <div class="pathwrap" id="pathwrap">
+      <svg id="pathsvg" aria-hidden="true" focusable="false">
+        <path id="pbase" fill="none" stroke-width="12" stroke-linecap="round"/>
+        <path id="pline" fill="none" stroke-width="12" stroke-linecap="round"/>
+        <circle id="ptip" r="15" cx="0" cy="0" opacity="0"/>
+      </svg>
+      <div class="stop" data-f=".16"><span class="stk"><svg viewBox="0 0 92 92" aria-hidden="true"><rect x="10" y="16" width="56" height="40" rx="10"/><path d="M24 56v14l16-14"/><rect x="40" y="40" width="42" height="30" rx="8" fill="#FFD0E6"/></svg></span><span class="tt"><h3><small>01</small>Discuss</h3></span><span class="bub">Tell me your project and budget.</span></div>
+      <div class="stop" data-f=".4"><span class="stk"><svg viewBox="0 0 92 92" aria-hidden="true"><rect x="18" y="8" width="56" height="76" rx="8"/><path d="M30 28h32M30 42h32M30 56h18"/></svg></span><span class="tt"><h3><small>02</small>Quotation</h3></span><span class="bub">A clear written quote with scope and price.</span></div>
+      <div class="stop" data-f=".7"><span class="stk"><svg viewBox="0 0 92 92" aria-hidden="true"><rect x="8" y="14" width="76" height="56" rx="8"/><path d="M8 28h76M30 80h32M46 70v10"/></svg></span><span class="tt"><h3><small>03</small>Build</h3></span><span class="bub">You review a demo and ask for changes.</span></div>
+      <div class="stop" data-f=".96"><span class="stk"><svg viewBox="0 0 92 92" aria-hidden="true"><path d="M14 50l22 22L78 22"/><circle cx="46" cy="46" r="38"/></svg></span><span class="tt"><h3><small>04</small>Handover</h3></span><span class="bub">The site goes live, and you get the files and login.</span></div>
     </div>
   </section>
 
@@ -737,6 +740,25 @@ const FORM_URL = "";
   });
 
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- smooth scrolling (Lenis) + GSAP ---------- */
+  var FX = (window.DHCoins && DHCoins.fx) ? DHCoins.fx : null, gsap = FX ? FX.gsap : null, ST = FX ? FX.ScrollTrigger : null, lenis = null;
+  if (FX && !reduce) {
+    try {
+      lenis = new FX.Lenis({ lerp: 0.1, duration: 1.4, smoothWheel: true, syncTouch: false, wheelMultiplier: 0.95 });
+      lenis.on('scroll', ST.update);
+      gsap.ticker.add(function (t) { lenis.raf(t * 1000); });
+      gsap.ticker.lagSmoothing(0);
+      document.documentElement.classList.add('lenis');
+      document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+        a.addEventListener('click', function (e) {
+          var id = a.getAttribute('href'); if (id.length < 2) { return; }
+          var t = document.querySelector(id); if (!t) { return; }
+          e.preventDefault(); lenis.scrollTo(t, { offset: id === '#contact' ? 0 : -10, duration: 1.6 });
+        });
+      });
+    } catch (e) { lenis = null; }
+  }
   var hero = document.getElementById('hero'), hl = document.getElementById('hl'), nav = document.getElementById('nav');
   var lap = document.getElementById('lap'), img = document.getElementById('img'), stage = document.getElementById('stage');
 
@@ -874,25 +896,86 @@ const FORM_URL = "";
     window.addEventListener('mousemove', function (e) { tx = e.clientX; ty = e.clientY; if (cs < 0.02) { cx = tx; cy = ty; } kick(); }, { passive: true });
   }
 
-  /* ---------- how it works: black cards slide sideways ---------- */
-  var sdark = document.getElementById('how'), sw = document.getElementById('sw'), strack = document.getElementById('strack');
-  var spg = document.getElementById('sprog');
-  var mq = window.matchMedia('(max-width:760px)');
-  function stepsStatic() { return reduce || mq.matches; }
-  function updSteps() {
-    if (stepsStatic()) { sdark.classList.add('static'); strack.style.transform = ''; return; }
-    sdark.classList.remove('static');
-    var vh = window.innerHeight, top = sw.getBoundingClientRect().top;
-    var p = Math.min(1, Math.max(0, -top / (sw.offsetHeight - vh)));
-    var max = Math.max(0, strack.scrollWidth - window.innerWidth);
-    strack.style.transform = 'translate3d(' + (-p * max).toFixed(1) + 'px,0,0)';
-    spg.style.transform = 'scaleX(' + p.toFixed(3) + ')';
-  }
-  var st = false;
-  window.addEventListener('scroll', function () { if (!st) { st = true; requestAnimationFrame(function () { st = false; updSteps(); }); } }, { passive: true });
-  window.addEventListener('resize', updSteps);
-  updSteps();
-
+  /* ---------- how it works: a pink line is drawn as you scroll ---------- */
+  (function () {
+    var wrap = document.getElementById('pathwrap'), svg = document.getElementById('pathsvg');
+    var base = document.getElementById('pbase'), line = document.getElementById('pline'), tip = document.getElementById('ptip');
+    var stops = Array.prototype.slice.call(wrap.querySelectorAll('.stop'));
+    var D_WIDE = 'M1060 0 C1060 150 940 190 800 230 C610 285 330 250 300 430 C275 590 470 640 650 690 C860 750 990 800 940 940 C900 1050 760 1050 690 980 C620 910 700 820 780 880 C860 940 780 1070 640 1130 C440 1215 270 1230 280 1380 C290 1520 520 1500 640 1560 C760 1620 800 1740 740 1830';
+    var D_NARROW = 'M40 0 C40 140 130 150 130 300 C130 440 50 450 50 600 C50 750 130 760 130 910 C130 1050 50 1060 50 1210 C50 1330 110 1350 110 1450';
+    var WIDE = [{ side: 'l', gap: 56, ty: '-108%' }, { side: 'r', gap: 44, ty: '-100%' }, { side: 'r', gap: 100, ty: '-10%' }, { side: 'l', gap: 90, ty: '-20%' }];
+    var mode = '', len = 0, vbX = -100, vbW = 1400, vbH = 1900, table = [], tl = [], cur = 0, target = 0, active = false, tkr = false;
+    function setup() {
+      var narrow = window.matchMedia('(max-width:760px)').matches, m = narrow ? 'n' : 'w';
+      vbX = narrow ? 0 : -100; vbW = narrow ? 400 : 1400; vbH = narrow ? 1500 : 1900;
+      wrap.style.aspectRatio = vbW + ' / ' + vbH;
+      svg.setAttribute('viewBox', vbX + ' 0 ' + vbW + ' ' + vbH);
+      if (m !== mode) {
+        mode = m; var d = narrow ? D_NARROW : D_WIDE;
+        base.setAttribute('d', d); line.setAttribute('d', d);
+        base.setAttribute('stroke-width', narrow ? 8 : 12); line.setAttribute('stroke-width', narrow ? 8 : 12);
+        tip.setAttribute('r', narrow ? 11 : 15);
+      }
+      len = line.getTotalLength();
+      table = []; var n = 700;
+      for (var i = 0; i <= n; i++) { var p = line.getPointAtLength(len * i / n); table.push({ l: len * i / n, y: p.y }); }
+      var k = vbW / wrap.clientWidth;
+      stops.forEach(function (el) {
+        var f = parseFloat(el.getAttribute('data-f')), p = line.getPointAtLength(len * f);
+        var px = (p.x - vbX) / vbW * 100, py = p.y / vbH * 100;
+        var o = narrow ? { side: 'r', gap: 34, ty: '-34%' } : WIDE[stops.indexOf(el)], right = o.side === 'r';
+        el.classList.toggle('r', right); el.classList.toggle('l', !right);
+        el.style.left = px + '%'; el.style.top = py + '%';
+        el.style.transform = 'translate(' + (right ? o.gap + 'px' : 'calc(-100% - ' + o.gap + 'px)') + ',' + o.ty + ')';
+        if (!el._nd) { el._nd = document.createElementNS('http://www.w3.org/2000/svg', 'circle'); el._nd.setAttribute('class', 'nd'); svg.insertBefore(el._nd, tip); }
+        el._nd.setAttribute('cx', p.x); el._nd.setAttribute('cy', p.y); el._nd.setAttribute('r', narrow ? 9 : 13);
+        el.style.maxWidth = narrow ? (100 - px - 6) + '%' : 'none';
+        el._len = len * f;
+      });
+    }
+    function build() {
+      tl.forEach(function (t) { t.kill(); }); tl = [];
+      stops.forEach(function (el) {
+        var t = gsap.timeline({ paused: true });
+        t.fromTo(el.querySelector('.stk'), { scale: 0, rotate: -40, opacity: 0 }, { scale: 1, rotate: -6, opacity: 1, duration: .55, ease: 'back.out(2.2)' }, 0)
+         .fromTo(el.querySelector('h3'), { yPercent: 105 }, { yPercent: 0, duration: .6, ease: 'power3.out' }, .08)
+         .fromTo(el.querySelector('.bub'), { scale: .6, opacity: 0, y: 14 }, { scale: 1, opacity: 1, y: 0, rotate: -2.5, duration: .55, ease: 'back.out(2)' }, .3);
+        el._tl = t; el._on = false;
+      });
+    }
+    function targetLen() {
+      var r = wrap.getBoundingClientRect(), vh = window.innerHeight, scale = r.width / vbW;
+      var yTip = (vh * 0.58 - r.top) / scale;
+      if (yTip <= 0) { return 0; }
+      var best = 0;
+      for (var i = 0; i < table.length; i++) { if (table[i].y <= yTip) { best = table[i].l; } else if (table[i].l > best + len * 0.18) { break; } }
+      if (yTip >= vbH - 40) { best = len; }
+      return best;
+    }
+    function draw() {
+      cur += (target - cur) * 0.14; if (Math.abs(target - cur) < 0.5) { cur = target; }
+      line.style.strokeDasharray = len + ' ' + (len + 4); line.style.strokeDashoffset = (len - cur).toFixed(1);
+      var p = line.getPointAtLength(cur); tip.setAttribute('cx', p.x); tip.setAttribute('cy', p.y);
+      tip.setAttribute('opacity', cur > 2 && cur < len - 2 ? 1 : (cur >= len - 2 ? 0 : 0));
+      stops.forEach(function (el) {
+        var on = cur >= el._len - 10;
+        if (on !== el._on) { el._on = on; el.classList.toggle('on', on); gsap.to(el._nd, { opacity: on ? 1 : 0, duration: .3 }); if (on) { el._tl.play(); } else { el._tl.reverse(); } }
+      });
+      if (cur === target) { active = false; gsap.ticker.remove(draw); }
+    }
+    function kick() { target = targetLen(); if (!active) { active = true; gsap.ticker.add(draw); } }
+    function all() {
+      line.style.strokeDasharray = ''; line.style.strokeDashoffset = '0';
+      stops.forEach(function (el) { el.classList.add('on'); el._nd.style.opacity = 1; el.querySelector('h3').style.transform = 'none'; el.querySelector('.stk').style.opacity = 1; el.querySelector('.bub').style.opacity = 1; });
+    }
+    setup();
+    if (!gsap || reduce) { all(); window.addEventListener('resize', setup); return; }
+    build(); line.style.strokeDasharray = len + ' ' + (len + 4); line.style.strokeDashoffset = len;
+    ST.create({ trigger: wrap, start: 'top bottom', end: 'bottom top', onUpdate: kick, onRefresh: kick });
+    window.addEventListener('resize', function () { var o = mode; setup(); if (o !== mode) { build(); } cur = 0; kick(); });
+    if (document.fonts && document.fonts.ready) { document.fonts.ready.then(function () { setup(); kick(); }); }
+    kick();
+  })();
 
   /* ---------- contact: a pen writes WhatsApp and Email ---------- */
   var cwrite = document.getElementById('cwrite');
