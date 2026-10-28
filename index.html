@@ -174,15 +174,17 @@ a.pan{display:block;text-decoration:none;color:inherit}
 /* steps: black band, cards slide sideways */
 .steps-dark{background:var(--black);color:#fff;margin-top:clamp(70px,11vw,140px);padding:0}
 .steps-dark .head .mono{color:#8C95A3}
-.sw{height:300svh;position:relative}
+.sw{height:380svh;position:relative}
 .sstage{position:sticky;top:0;height:100svh;overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:clamp(24px,5vh,56px)}
 .sstage .head{padding-top:70px}
 .strack{display:flex;gap:clamp(16px,2vw,28px);padding:0 var(--pad);width:max-content;will-change:transform}
-.scd{flex:none;width:min(440px,78vw);height:min(46svh,380px);background:#1A1F27;border:1px solid #2A313C;border-radius:26px;padding:clamp(20px,2.4vw,34px);display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+.scd{flex:none;width:clamp(420px,36vw,680px);height:min(52svh,460px);background:#1A1F27;border:1px solid #2A313C;border-radius:26px;padding:clamp(20px,2.4vw,34px);display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
 .scd .big{font-size:clamp(70px,9vw,130px);font-weight:500;letter-spacing:-.05em;line-height:.9;color:var(--pink)}
 .scd h3{font-size:clamp(28px,3vw,42px);font-weight:500;letter-spacing:-.03em;margin-bottom:8px}
 .scd p{color:#A6AEBB;font-size:16.5px;max-width:28ch}
 .scd .art2{position:absolute;right:16px;top:16px;width:92px;height:auto;opacity:.9}
+.sprog{margin:0 var(--pad);height:3px;background:#2A313C;border-radius:3px;overflow:hidden}.sprog i{display:block;height:100%;width:100%;background:var(--pink);transform-origin:left;transform:scaleX(0)}
+.steps-dark.static .sprog{display:none}
 .steps-dark.static .sw{height:auto;padding-bottom:70px}
 .steps-dark.static .sstage{position:static;height:auto;overflow:visible}
 .steps-dark.static .strack{width:auto;flex-direction:column}
@@ -571,6 +573,7 @@ footer{background:#FFD9EC;padding:clamp(50px,7vw,90px) var(--pad) 28px;display:f
           <div class="scd"><svg class="art2" stroke="#5A6472" stroke-width="2" fill="none" viewBox="0 0 92 92" aria-hidden="true"><rect x="8" y="14" width="76" height="56" rx="8"/><path d="M8 28h76M30 80h32M46 70v10"/></svg><span class="big">03</span><div><h3>Build</h3><p>You review a demo and ask for changes.</p></div></div>
           <div class="scd"><svg class="art2" stroke="#5A6472" stroke-width="2" fill="none" viewBox="0 0 92 92" aria-hidden="true"><path d="M14 50l22 22L78 22"/><circle cx="46" cy="46" r="38"/></svg><span class="big">04</span><div><h3>Handover</h3><p>The site goes live, and you get the files and login.</p></div></div>
         </div>
+        <div class="sprog" aria-hidden="true"><i id="sprog"></i></div>
       </div>
     </div>
   </section>
@@ -809,6 +812,7 @@ const FORM_URL = "";
 
   /* ---------- how it works: black cards slide sideways ---------- */
   var sdark = document.getElementById('how'), sw = document.getElementById('sw'), strack = document.getElementById('strack');
+  var spg = document.getElementById('sprog');
   var mq = window.matchMedia('(max-width:760px)');
   function stepsStatic() { return reduce || mq.matches; }
   function updSteps() {
@@ -818,6 +822,7 @@ const FORM_URL = "";
     var p = Math.min(1, Math.max(0, -top / (sw.offsetHeight - vh)));
     var max = Math.max(0, strack.scrollWidth - window.innerWidth);
     strack.style.transform = 'translate3d(' + (-p * max).toFixed(1) + 'px,0,0)';
+    spg.style.transform = 'scaleX(' + p.toFixed(3) + ')';
   }
   var st = false;
   window.addEventListener('scroll', function () { if (!st) { st = true; requestAnimationFrame(function () { st = false; updSteps(); }); } }, { passive: true });
