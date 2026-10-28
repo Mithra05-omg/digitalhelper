@@ -252,11 +252,20 @@ a.pan{display:block;text-decoration:none;color:inherit}
 /* contact */
 .contact{padding:clamp(80px,12vw,160px) var(--pad) 0;background:#FFD9EC;border-radius:26px 26px 0 0;margin-top:clamp(70px,11vw,140px)}
 .contact h2{font-size:clamp(46px,10.5vw,176px);max-width:11ch}
-.pick{margin-top:clamp(28px,4vw,50px);display:flex;flex-wrap:wrap;gap:10px;align-items:center}
-.pick .lab{font-family:var(--mono);font-size:13px;text-transform:uppercase;color:var(--muted);margin-right:6px}
-.pick button.opt{border:2px solid var(--ink);background:transparent;border-radius:999px;padding:10px 20px;font:600 16px var(--sans);cursor:pointer;transition:.2s}
-.pick button.opt:hover{border-color:var(--pink)}
-.pick button.opt[aria-pressed="true"]{background:var(--ink);color:#fff}
+.needwrap{height:230svh;position:relative;margin-top:clamp(20px,3vw,40px)}
+.needstage{position:sticky;top:0;height:100svh;display:flex;align-items:center}
+.pick{width:100%}
+.pick .lab{display:block;font-family:var(--mono);font-size:13px;text-transform:uppercase;color:var(--muted);margin:0 0 clamp(14px,2vw,24px) 0}
+.nlist{position:relative;display:flex;flex-direction:column;gap:clamp(4px,1vw,12px);padding-left:clamp(44px,6vw,84px)}
+.nline{position:absolute;left:10px;top:.6em;bottom:.6em;width:2px;background:rgba(11,18,32,.16);border-radius:2px;overflow:hidden}
+.nline i{display:block;width:100%;height:100%;background:var(--ink);transform-origin:top;transform:scaleY(0)}
+.ndot{position:absolute;left:0;top:0;width:22px;height:22px;margin-top:-11px;border-radius:50%;background:var(--pink);box-shadow:0 0 0 6px rgba(233,30,140,.18);transform:translate3d(0,0,0);will-change:transform}
+.nlist button.opt{display:flex;align-items:baseline;gap:clamp(12px,1.6vw,22px);text-align:left;border:0;background:none;padding:0;cursor:pointer;color:rgba(11,18,32,.2);transition:color .4s ease;font-family:var(--sans)}
+.nlist button.opt small{font:500 13px var(--mono);letter-spacing:.04em;transform:translateY(-.9em)}
+.nlist button.opt span{font-size:clamp(44px,8.6vw,132px);font-weight:500;letter-spacing:-.045em;line-height:1.02}
+.nlist button.opt:hover{color:rgba(11,18,32,.5)}
+.nlist button.opt[aria-pressed="true"]{color:var(--ink)}
+.nlist button.opt:focus-visible{outline:3px solid var(--ink);outline-offset:4px;border-radius:8px}
 .contact .btnrow{margin-top:26px}
 .contact .info{margin-top:22px;color:var(--muted);font-size:16px}
 .contact .info a{color:var(--ink)}
@@ -270,7 +279,12 @@ a.pan{display:block;text-decoration:none;color:inherit}
 .form .status{min-height:22px;font-size:15px}
 .form .status.ok{color:#166534}
 .form .status.bad{color:#B91C1C}
-footer{background:#FFD9EC;padding:clamp(50px,7vw,90px) var(--pad) 28px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;color:var(--muted);font-size:13px}
+footer{background:#FFD9EC;padding:clamp(40px,6vw,80px) var(--pad) 0;color:var(--muted);font-size:13px;overflow:hidden}
+.fmeta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;padding-bottom:clamp(24px,4vw,56px)}
+.fwm{overflow:hidden;height:.84em;font-size:100px;line-height:1;white-space:nowrap;user-select:none}
+.fwin{display:inline-block;font-weight:600;letter-spacing:-.06em;color:var(--ink);line-height:1}
+.fwin b{font-weight:600;color:var(--pink)}
+.fwin .fl{display:inline-block;will-change:transform}
 .fab{position:fixed;right:14px;bottom:14px;z-index:40;display:none;align-items:center;gap:8px;background:var(--green);color:#fff;text-decoration:none;font-weight:600;padding:12px 18px;border-radius:999px;box-shadow:0 8px 20px rgba(0,0,0,.25)}
 .fab svg{width:20px;height:20px;fill:currentColor}
 
@@ -307,7 +321,7 @@ footer{background:#FFD9EC;padding:clamp(50px,7vw,90px) var(--pad) 28px;display:f
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .marq .track{animation:none}
-  .js .hl,.js .hl .l,.js .fade,.js .lapin,.js .rv{transition:none;opacity:1;transform:none;color:var(--ink)}
+  .needwrap{height:auto}.needstage{position:static;height:auto}.js .hl,.js .hl .l,.js .fade,.js .lapin,.js .rv{transition:none;opacity:1;transform:none;color:var(--ink)}
   .js .hl{width:100%}
 }
 </style>
@@ -580,12 +594,20 @@ footer{background:#FFD9EC;padding:clamp(50px,7vw,90px) var(--pad) 28px;display:f
 
   <section id="contact" class="contact">
     <h2 class="rv">Got a project in mind?</h2>
-    <div class="pick rv" id="pick" role="group" aria-label="What do you need?">
-      <span class="lab">I need:</span>
-      <button class="opt" type="button" aria-pressed="false" data-v="a website">Website</button>
-      <button class="opt" type="button" aria-pressed="false" data-v="an online store setup">Online store</button>
-      <button class="opt" type="button" aria-pressed="false" data-v="help with Excel or Google Sheets">Sheets</button>
-      <button class="opt" type="button" aria-pressed="false" data-v="hosting and server setup">Hosting</button>
+    <div class="needwrap" id="needwrap">
+      <div class="needstage">
+        <div class="pick" id="pick" role="group" aria-label="What do you need?">
+          <span class="lab">I need</span>
+          <div class="nlist" id="nlist">
+            <span class="nline" aria-hidden="true"><i id="nfill"></i></span>
+            <span class="ndot" id="ndot" aria-hidden="true"></span>
+            <button class="opt" type="button" aria-pressed="true" data-v="a website"><small>01</small><span>Website</span></button>
+            <button class="opt" type="button" aria-pressed="false" data-v="an online store setup"><small>02</small><span>Online store</span></button>
+            <button class="opt" type="button" aria-pressed="false" data-v="help with Excel or Google Sheets"><small>03</small><span>Sheets</span></button>
+            <button class="opt" type="button" aria-pressed="false" data-v="hosting and server setup"><small>04</small><span>Hosting</span></button>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="cwrite" id="cwrite">
       <div class="cgrid">
@@ -625,7 +647,10 @@ footer{background:#FFD9EC;padding:clamp(50px,7vw,90px) var(--pad) 28px;display:f
   </section>
 </main>
 
-<footer><span>DigitalHelper</span><span>Sample projects use made-up businesses and sample data.</span></footer>
+<footer id="foot">
+  <div class="fmeta"><span>DigitalHelper</span><span>Sample projects use made-up businesses and sample data.</span></div>
+  <div class="fwm" id="fwm"><span class="fwin" id="fwin" aria-hidden="true">Digital<b>Helper</b></span><span class="sr">DigitalHelper</span></div>
+</footer>
 
 <a class="fab" data-wa="" href="#contact" aria-label="Message me on WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.2 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l1.8.9c.3.1.5.2.5.3.1.2.1.8-.1 1.4z"/></svg>WhatsApp</a>
 
@@ -657,14 +682,53 @@ const FORM_URL = "";
     a.href = 'mailto:' + EMAIL + '?subject=' + encodeURIComponent('Project enquiry');
   });
 
-  /* "I need" picker */
-  var pick = document.getElementById('pick');
-  pick.addEventListener('click', function (e) {
-    var b = e.target.closest('button.opt'); if (!b) { return; }
-    pick.querySelectorAll('.opt').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
-    var href = waLink("Hi Mithra, I need " + b.getAttribute('data-v') + ". My budget is about RM ___.");
+  /* "I need" list: scroll moves the dot and picks the item */
+  var pick = document.getElementById('pick'), nlist = document.getElementById('nlist'), nwrap = document.getElementById('needwrap');
+  var nitems = Array.prototype.slice.call(nlist.querySelectorAll('button.opt')), ndot = document.getElementById('ndot'), nfill = document.getElementById('nfill');
+  var nact = -1;
+  function setNeed(i) {
+    if (i === nact) { return; } nact = i;
+    nitems.forEach(function (x, k) { x.setAttribute('aria-pressed', String(k === i)); });
+    var href = waLink("Hi Mithra, I need " + nitems[i].getAttribute('data-v') + ". My budget is about RM ___.");
     document.querySelectorAll('.wadyn').forEach(function (a) { a.href = href; a.target = '_blank'; a.rel = 'noopener noreferrer'; });
+  }
+  function centers() { var t = nlist.getBoundingClientRect().top; return nitems.map(function (b) { var r = b.querySelector('span').getBoundingClientRect(); return r.top - t + r.height / 2; }); }
+  var nsel = 0, ndy = 0, ndt = 0, nraf = 0;
+  function drawDot(y) {
+    ndot.style.transform = 'translate3d(0,' + y.toFixed(1) + 'px,0)';
+    var c = centers(); nfill.style.transform = 'scaleY(' + Math.min(1, Math.max(0, (y - c[0]) / (c[c.length - 1] - c[0] || 1))).toFixed(3) + ')';
+  }
+  function needTick() {
+    ndy += (ndt - ndy) * 0.16; drawDot(ndy);
+    if (Math.abs(ndt - ndy) > 0.4) { nraf = requestAnimationFrame(needTick); } else { ndy = ndt; drawDot(ndy); nraf = 0; }
+  }
+  function updNeed(snap) {
+    var c = centers(), p;
+    if (reduceNeed()) { p = nsel / 3; }
+    else {
+      var r = nwrap.getBoundingClientRect(), tot = nwrap.offsetHeight - window.innerHeight;
+      p = Math.min(1, Math.max(0, -r.top / (tot * 0.82 || 1)));
+    }
+    var f = p * (c.length - 1), i0 = Math.min(c.length - 2, Math.floor(f)), t = f - i0;
+    ndt = c[i0] + (c[i0 + 1] - c[i0]) * t;
+    setNeed(Math.min(c.length - 1, Math.round(f)));
+    if (snap) { ndy = ndt; drawDot(ndy); } else if (!nraf) { nraf = requestAnimationFrame(needTick); }
+  }
+  function reduceNeed() { return window.matchMedia('(prefers-reduced-motion: reduce)').matches; }
+  nitems.forEach(function (b, k) {
+    b.addEventListener('click', function () {
+      nsel = k;
+      if (reduceNeed()) { setNeed(k); updNeed(false); return; }
+      var tot = nwrap.offsetHeight - window.innerHeight, top = nwrap.getBoundingClientRect().top + window.pageYOffset;
+      window.scrollTo({ top: top + tot * 0.82 * (k / 3) + 2, behavior: 'smooth' });
+    });
   });
+  var nt = false;
+  window.addEventListener('scroll', function () { if (!nt) { nt = true; requestAnimationFrame(function () { nt = false; updNeed(false); }); } }, { passive: true });
+  window.addEventListener('resize', function () { updNeed(true); });
+  setNeed(0); updNeed(true);
+  if (document.fonts && document.fonts.ready) { document.fonts.ready.then(function () { updNeed(true); }); }
+
   var copy = document.getElementById('copyMail');
   copy.addEventListener('click', function () {
     function ok() { copy.textContent = 'Copied'; setTimeout(function () { copy.textContent = 'Copy email'; }, 1800); }
@@ -862,6 +926,40 @@ const FORM_URL = "";
       pio.observe(document.querySelector('.cgrid'));
     } else { pen.play(); }
   }
+
+  /* ---------- footer wordmark: letters rise while you scroll ---------- */
+  var fwm = document.getElementById('fwm'), fwin = document.getElementById('fwin'), fl = [];
+  (function () {
+    function wrap(node) {
+      Array.prototype.slice.call(node.childNodes).forEach(function (n) {
+        if (n.nodeType === 3) {
+          var f = document.createDocumentFragment();
+          n.textContent.split('').forEach(function (ch) { var sp = document.createElement('span'); sp.className = 'fl'; sp.textContent = ch; f.appendChild(sp); fl.push(sp); });
+          node.replaceChild(f, n);
+        } else if (n.nodeType === 1) { wrap(n); }
+      });
+    }
+    wrap(fwin);
+  })();
+  function fitWm() {
+    fwm.style.fontSize = '100px';
+    var w = fwin.getBoundingClientRect().width, avail = fwm.parentNode.clientWidth - 2 * parseFloat(getComputedStyle(fwm.parentNode).paddingLeft);
+    fwm.style.fontSize = (100 * avail / (w || 1)).toFixed(2) + 'px';
+  }
+  function updWm() {
+    var r = fwm.getBoundingClientRect(), vh = window.innerHeight;
+    var p = reduce ? 1 : Math.min(1, Math.max(0, (vh - r.top) / (r.height * 0.98)));
+    var n = fl.length;
+    fl.forEach(function (sp, i) {
+      var t = Math.min(1, Math.max(0, (p - (i / n) * 0.42) / 0.58)), e = 1 - Math.pow(1 - t, 3);
+      sp.style.transform = 'translate3d(0,' + ((1 - e) * 112).toFixed(1) + '%,0)';
+    });
+  }
+  fitWm(); updWm();
+  var wt = false;
+  window.addEventListener('scroll', function () { if (!wt) { wt = true; requestAnimationFrame(function () { wt = false; updWm(); }); } }, { passive: true });
+  window.addEventListener('resize', function () { fitWm(); updWm(); });
+  if (document.fonts && document.fonts.ready) { document.fonts.ready.then(function () { fitWm(); updWm(); }); }
 
   /* ---------- Malaysia clock ---------- */
   var clock = document.getElementById('clock');
