@@ -219,6 +219,12 @@ a.pan{display:block;text-decoration:none;color:inherit}
 @media (prefers-reduced-motion:reduce){.js .cbtns>*{transition:none}}
 
 /* about */
+.apin{height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 var(--pad);background:var(--bg)}
+.apin .mono{color:var(--ink);margin-bottom:clamp(18px,3vw,36px)}
+.astate{font-size:clamp(28px,5.1vw,80px);font-weight:600;letter-spacing:-.035em;line-height:1.06;max-width:17em;color:#E91E8C}
+.astate .aw{display:inline-block;white-space:nowrap}
+.astate .ac{display:inline-block;will-change:transform,color;color:rgba(233,30,140,.4)}
+.astate.st .ac{color:#E91E8C}
 .about{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(24px,5vw,80px);padding:clamp(40px,6vw,80px) var(--pad) 0;align-items:center}
 .portrait{position:relative;background:var(--pink);border-radius:26px;aspect-ratio:1/1.05;overflow:hidden}
 .portrait img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%;display:block}
@@ -254,20 +260,39 @@ a.pan{display:block;text-decoration:none;color:inherit}
 /* contact */
 .contact{padding:clamp(80px,12vw,160px) var(--pad) 0;background:#FFD9EC;border-radius:26px 26px 0 0;margin-top:clamp(70px,11vw,140px)}
 .contact h2{font-size:clamp(46px,10.5vw,176px);max-width:11ch}
-.needwrap{height:230svh;position:relative;margin-top:clamp(20px,3vw,40px)}
-.needstage{position:sticky;top:0;height:100svh;display:flex;align-items:center}
-.pick{width:100%}
-.pick .lab{display:block;font-family:var(--mono);font-size:13px;text-transform:uppercase;color:var(--muted);margin:0 0 clamp(14px,2vw,24px) 0}
-.nlist{position:relative;display:flex;flex-direction:column;gap:clamp(4px,1vw,12px);padding-left:clamp(44px,6vw,84px)}
-.nline{position:absolute;left:10px;top:.6em;bottom:.6em;width:2px;background:rgba(11,18,32,.16);border-radius:2px;overflow:hidden}
-.nline i{display:block;width:100%;height:100%;background:var(--ink);transform-origin:top;transform:scaleY(0)}
-.ndot{position:absolute;left:0;top:0;width:22px;height:22px;margin-top:-11px;border-radius:50%;background:var(--pink);box-shadow:0 0 0 6px rgba(233,30,140,.18);transform:translate3d(0,0,0);will-change:transform}
-.nlist button.opt{display:flex;align-items:baseline;gap:clamp(12px,1.6vw,22px);text-align:left;border:0;background:none;padding:0;cursor:pointer;color:rgba(11,18,32,.2);transition:color .4s ease;font-family:var(--sans)}
-.nlist button.opt small{font:500 13px var(--mono);letter-spacing:.04em;transform:translateY(-.9em)}
-.nlist button.opt span{font-size:clamp(44px,8.6vw,132px);font-weight:500;letter-spacing:-.045em;line-height:1.02}
-.nlist button.opt:hover{color:rgba(11,18,32,.5)}
-.nlist button.opt[aria-pressed="true"]{color:var(--ink)}
-.nlist button.opt:focus-visible{outline:3px solid var(--ink);outline-offset:4px;border-radius:8px}
+.arcs{container-type:inline-size;position:relative;width:min(100%,1200px);aspect-ratio:1200/760;margin:clamp(24px,4vw,56px) auto 0}
+.arcsvg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.arcsvg path{fill:none;stroke-width:3;stroke-linecap:round}
+.abase path{stroke:#E91E8C;opacity:.2}
+.adraw path{stroke:#E91E8C}
+#aApex{fill:#E91E8C}
+.eo{fill:none;stroke:#E91E8C;stroke-width:3}.ei{fill:#E91E8C}
+.ahead{position:absolute;transform:translate(-50%,0);font:600 13px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink)}
+.anode{position:absolute;width:0;height:0;padding:0;border:0;background:none;cursor:pointer;font-family:var(--sans);color:var(--ink)}
+.anode .ring{position:absolute;left:0;top:0;width:24px;height:24px;margin:-12px 0 0 -12px;border-radius:50%;border:3px solid #E91E8C;background:#FFD9EC;transition:transform .25s ease,background .25s ease,box-shadow .25s ease}
+.anode:hover .ring{transform:scale(1.25)}
+.anode[aria-pressed="true"] .ring{background:#E91E8C;box-shadow:0 0 0 6px rgba(233,30,140,.22)}
+.anode .al{position:absolute;top:0;transform:translateY(-50%);width:max-content;max-width:clamp(160px,24cqw,290px)}
+.anode.l .al{right:34px;text-align:right}.anode.r .al{left:34px;text-align:left}
+.anode b{display:block;font-size:clamp(20px,2.5cqw,30px);font-weight:600;letter-spacing:-.02em;line-height:1.1}
+.anode em{display:block;margin-top:6px;font-style:normal;font-size:clamp(13px,1.3cqw,15.5px);line-height:1.4;color:#6A4A5B}
+.anode[aria-pressed="true"] b{color:#E91E8C}
+.anode:focus-visible .ring{outline:3px solid var(--ink);outline-offset:3px}
+@media (min-width:761px){.arcjs .anode .ring,.arcjs .anode .al,.arcjs .ahead,.arcjs .ahint{opacity:0}}
+.ahint{position:absolute;left:50%;bottom:2%;transform:translateX(-50%);font:500 12px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:#6A4A5B}
+@media (max-width:760px){
+  .arcs{aspect-ratio:auto;display:flex;flex-direction:column;padding:0 0 10px 34px;margin-top:24px}
+  #hB{order:1}.anode:nth-of-type(1){order:2}.anode:nth-of-type(2){order:3}#hR{order:4}.anode:nth-of-type(3){order:5}.anode:nth-of-type(4){order:6}.ahint{order:9}
+  .arcsvg{display:none}
+  .arcs::before{content:"";position:absolute;left:11px;top:0;bottom:30px;width:3px;border-radius:3px;background:rgba(233,30,140,.2)}
+  .arcs::after{content:"";position:absolute;left:11px;top:0;bottom:30px;width:3px;border-radius:3px;background:#E91E8C;transform-origin:top;transform:scaleY(var(--lp,1))}
+  .ahead{position:relative!important;left:auto!important;top:auto!important;transform:none;display:block;margin:22px 0 8px}
+  .anode{position:relative!important;left:auto!important;top:auto!important;width:100%;height:auto;display:block;text-align:left;padding:14px 0 14px 0;margin:0}
+  .anode .ring{left:-34px;top:26px}
+  .anode .al{position:static;transform:none;width:auto;max-width:none;text-align:left!important;display:block}
+  .anode b{font-size:26px}.anode em{font-size:15px}
+  .ahint{position:relative;left:auto;bottom:auto;transform:none;display:block;margin-top:14px}
+}
 .contact .btnrow{margin-top:26px}
 .contact .info{margin-top:22px;color:var(--muted);font-size:16px}
 .contact .info a{color:var(--ink)}
@@ -323,7 +348,7 @@ footer{background:#FFD9EC;padding:clamp(40px,6vw,80px) var(--pad) 0;color:var(--
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .marq .track{animation:none}
-  .needwrap{height:auto}.needstage{position:static;height:auto}.js .hl,.js .hl .l,.js .fade,.js .lapin,.js .rv{transition:none;opacity:1;transform:none;color:var(--ink)}
+  .js .hl,.js .hl .l,.js .fade,.js .lapin,.js .rv{transition:none;opacity:1;transform:none;color:var(--ink)}
   .js .hl{width:100%}
 }
 html.lenis,html.lenis body{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!important}.lenis.lenis-stopped{overflow:hidden}
@@ -563,7 +588,10 @@ html.lenis,html.lenis body{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!
   </section>
 
   <section id="about">
-    <div class="head rv"><div class="mono">( About )</div><h2>Who you work with.</h2></div>
+    <div class="apin" id="apin">
+      <div class="mono">( About )</div>
+      <p class="astate" id="astate" data-t="I'm a web developer based in Seremban, Malaysia. I build websites and online stores for small and growing businesses, and I keep everything simple and clear. You talk to me directly, from the first message to the day your site goes live.">I'm a web developer based in Seremban, Malaysia. I build websites and online stores for small and growing businesses, and I keep everything simple and clear. You talk to me directly, from the first message to the day your site goes live.</p>
+    </div>
     <div class="about">
       <div class="portrait rv">
         <span class="ph">M</span>
@@ -571,7 +599,6 @@ html.lenis,html.lenis body{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!
       </div>
       <div class="about-txt rv">
         <h2>Hi, I'm Mithra.</h2>
-        <p>I'm a web developer based in Seremban, Malaysia. I build websites and online stores for small and growing businesses in Malaysia.</p>
         <p>You tell me what you sell and what budget you have, and we work out what fits. Then I send a written quote, so you know the price before any work starts. Your site works on phones, you can update it yourself, and I put it online for you. I also set up your Shopee, Lazada, TikTok Shop or Shopify store, and organise your sales in Excel or Google Sheets.</p>
         <p>I'm pursuing a Bachelor of Information Technology at UKM, so I build on solid technical basics. I started building websites because I like turning a messy idea into something people can actually use. That's why I keep everything simple and clear, for you and for your customers. When you work with me, you talk to me directly, from the first message to the day your site goes live.</p>
         <p>I reply to every message within one day. I'm open to new projects now, so message me on WhatsApp or email me and tell me what you need.</p>
@@ -597,20 +624,20 @@ html.lenis,html.lenis body{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!
 
   <section id="contact" class="contact">
     <h2 class="rv">Got a project in mind?</h2>
-    <div class="needwrap" id="needwrap">
-      <div class="needstage">
-        <div class="pick" id="pick" role="group" aria-label="What do you need?">
-          <span class="lab">I need</span>
-          <div class="nlist" id="nlist">
-            <span class="nline" aria-hidden="true"><i id="nfill"></i></span>
-            <span class="ndot" id="ndot" aria-hidden="true"></span>
-            <button class="opt" type="button" aria-pressed="true" data-v="a website"><small>01</small><span>Website</span></button>
-            <button class="opt" type="button" aria-pressed="false" data-v="an online store setup"><small>02</small><span>Online store</span></button>
-            <button class="opt" type="button" aria-pressed="false" data-v="help with Excel or Google Sheets"><small>03</small><span>Sheets</span></button>
-            <button class="opt" type="button" aria-pressed="false" data-v="hosting and server setup"><small>04</small><span>Hosting</span></button>
-          </div>
-        </div>
-      </div>
+    <div class="arcs" id="arcs" role="group" aria-label="What do you need?">
+      <svg class="arcsvg" id="arcsvg" viewBox="0 0 1200 760" aria-hidden="true" focusable="false">
+        <g class="abase"><path d="M600 0V200"/><path d="M600 200C430 200 270 330 270 520V700"/><path d="M600 200C770 200 930 330 930 520V700"/></g>
+        <g class="adraw"><path id="aT" d="M600 0V200"/><path id="aL" d="M600 200C430 200 270 330 270 520V700"/><path id="aR" d="M600 200C770 200 930 330 930 520V700"/></g>
+        <circle id="aApex" cx="600" cy="200" r="8"/>
+        <g id="aEnds"><circle class="eo" cx="270" cy="700" r="17"/><circle class="ei" cx="270" cy="700" r="6"/><circle class="eo" cx="930" cy="700" r="17"/><circle class="ei" cx="930" cy="700" r="6"/></g>
+      </svg>
+      <span class="ahead" id="hB" style="left:27%;top:17%">Build</span>
+      <span class="ahead" id="hR" style="left:73%;top:17%">Run</span>
+      <button class="anode l" type="button" aria-pressed="false" data-v="a website" data-arc="L" data-f=".5"><i class="ring"></i><span class="al"><b>Website</b><em>Fast, works on phones, easy to update.</em></span></button>
+      <button class="anode l" type="button" aria-pressed="false" data-v="an online store setup" data-arc="L" data-f=".86"><i class="ring"></i><span class="al"><b>Online store</b><em>Shopee, Lazada, TikTok Shop or Shopify, ready to sell.</em></span></button>
+      <button class="anode r" type="button" aria-pressed="false" data-v="help with Excel or Google Sheets" data-arc="R" data-f=".5"><i class="ring"></i><span class="al"><b>Sheets</b><em>Excel or Google Sheets that save you hours.</em></span></button>
+      <button class="anode r" type="button" aria-pressed="false" data-v="hosting and server setup" data-arc="R" data-f=".86"><i class="ring"></i><span class="al"><b>Hosting</b><em>Your site online, with domain and server set up.</em></span></button>
+      <span class="ahint">Tap one to start your message</span>
     </div>
     <div class="cwrite" id="cwrite">
       <div class="cgrid">
@@ -685,52 +712,56 @@ const FORM_URL = "";
     a.href = 'mailto:' + EMAIL + '?subject=' + encodeURIComponent('Project enquiry');
   });
 
-  /* "I need" list: scroll moves the dot and picks the item */
-  var pick = document.getElementById('pick'), nlist = document.getElementById('nlist'), nwrap = document.getElementById('needwrap');
-  var nitems = Array.prototype.slice.call(nlist.querySelectorAll('button.opt')), ndot = document.getElementById('ndot'), nfill = document.getElementById('nfill');
-  var nact = -1;
-  function setNeed(i) {
-    if (i === nact) { return; } nact = i;
-    nitems.forEach(function (x, k) { x.setAttribute('aria-pressed', String(k === i)); });
-    var href = waLink("Hi Mithra, I need " + nitems[i].getAttribute('data-v') + ". My budget is about RM ___.");
-    document.querySelectorAll('.wadyn').forEach(function (a) { a.href = href; a.target = '_blank'; a.rel = 'noopener noreferrer'; });
-  }
-  function centers() { var t = nlist.getBoundingClientRect().top; return nitems.map(function (b) { var r = b.querySelector('span').getBoundingClientRect(); return r.top - t + r.height / 2; }); }
-  var nsel = 0, ndy = 0, ndt = 0, nraf = 0;
-  function drawDot(y) {
-    ndot.style.transform = 'translate3d(0,' + y.toFixed(1) + 'px,0)';
-    var c = centers(); nfill.style.transform = 'scaleY(' + Math.min(1, Math.max(0, (y - c[0]) / (c[c.length - 1] - c[0] || 1))).toFixed(3) + ')';
-  }
-  function needTick() {
-    ndy += (ndt - ndy) * 0.16; drawDot(ndy);
-    if (Math.abs(ndt - ndy) > 0.4) { nraf = requestAnimationFrame(needTick); } else { ndy = ndt; drawDot(ndy); nraf = 0; }
-  }
-  function updNeed(snap) {
-    var c = centers(), p;
-    if (reduceNeed()) { p = nsel / 3; }
-    else {
-      var r = nwrap.getBoundingClientRect(), tot = nwrap.offsetHeight - window.innerHeight;
-      p = Math.min(1, Math.max(0, -r.top / (tot * 0.82 || 1)));
-    }
-    var f = p * (c.length - 1), i0 = Math.min(c.length - 2, Math.floor(f)), t = f - i0;
-    ndt = c[i0] + (c[i0 + 1] - c[i0]) * t;
-    setNeed(Math.min(c.length - 1, Math.round(f)));
-    if (snap) { ndy = ndt; drawDot(ndy); } else if (!nraf) { nraf = requestAnimationFrame(needTick); }
-  }
-  function reduceNeed() { return window.matchMedia('(prefers-reduced-motion: reduce)').matches; }
-  nitems.forEach(function (b, k) {
+  /* "I need": two arcs split from one line, pick a node */
+  var arcs = document.getElementById('arcs'), anodes = Array.prototype.slice.call(arcs.querySelectorAll('.anode'));
+  anodes.forEach(function (b) {
     b.addEventListener('click', function () {
-      nsel = k;
-      if (reduceNeed()) { setNeed(k); updNeed(false); return; }
-      var tot = nwrap.offsetHeight - window.innerHeight, top = nwrap.getBoundingClientRect().top + window.pageYOffset;
-      window.scrollTo({ top: top + tot * 0.82 * (k / 3) + 2, behavior: 'smooth' });
+      anodes.forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+      var href = waLink("Hi Mithra, I need " + b.getAttribute('data-v') + ". My budget is about RM ___.");
+      document.querySelectorAll('.wadyn').forEach(function (a) { a.href = href; a.target = '_blank'; a.rel = 'noopener noreferrer'; });
     });
   });
-  var nt = false;
-  window.addEventListener('scroll', function () { if (!nt) { nt = true; requestAnimationFrame(function () { nt = false; updNeed(false); }); } }, { passive: true });
-  window.addEventListener('resize', function () { updNeed(true); });
-  setNeed(0); updNeed(true);
-  if (document.fonts && document.fonts.ready) { document.fonts.ready.then(function () { updNeed(true); }); }
+  var arcSetup = function () {};
+  (function () {
+    var narrowQ = window.matchMedia('(max-width:760px)'), paths = { L: document.getElementById('aL'), R: document.getElementById('aR') };
+    var heads = [document.getElementById('hB'), document.getElementById('hR')], mode = '', tl = null;
+    function place() {
+      anodes.forEach(function (n) {
+        var p = paths[n.getAttribute('data-arc')], pt = p.getPointAtLength(p.getTotalLength() * parseFloat(n.getAttribute('data-f')));
+        n.style.left = (pt.x / 12) + '%'; n.style.top = (pt.y / 7.6) + '%';
+      });
+    }
+    function build() {
+      if (tl) { if (tl.scrollTrigger) { tl.scrollTrigger.kill(); } tl.kill(); tl = null; }
+      var narrow = narrowQ.matches;
+      gsap.set([arcs.querySelectorAll('.adraw path')], { clearProps: 'all' });
+      if (narrow) {
+        gsap.set(anodes.concat(heads), { clearProps: 'opacity,transform' });
+        anodes.forEach(function (n) { gsap.fromTo(n, { opacity: 0, x: 18 }, { opacity: 1, x: 0, duration: .6, ease: 'power3.out', scrollTrigger: { trigger: n, start: 'top 88%', toggleActions: 'play none none reverse' } }); });
+        gsap.fromTo(arcs, { '--lp': 0 }, { '--lp': 1, ease: 'none', scrollTrigger: { trigger: arcs, start: 'top 70%', end: 'bottom 75%', scrub: .5 } });
+        return;
+      }
+      place();
+      var tp = document.getElementById('aT');
+      tl = gsap.timeline({ scrollTrigger: { trigger: arcs, start: 'top 75%', end: 'bottom 72%', scrub: .6 } });
+      tl.fromTo(tp, { drawSVG: '0%' }, { drawSVG: '100%', ease: 'none', duration: .25 }, 0)
+        .fromTo('#aApex', { scale: 0, transformOrigin: '50% 50%' }, { scale: 1, duration: .04, ease: 'back.out(3)' }, .25)
+        .fromTo([paths.L, paths.R], { drawSVG: '0%' }, { drawSVG: '100%', ease: 'none', duration: .62 }, .27)
+        .fromTo(heads, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: .08 }, .3)
+        .fromTo('#aEnds', { opacity: 0 }, { opacity: 1, duration: .05 }, .88);
+      anodes.forEach(function (n) {
+        var f = parseFloat(n.getAttribute('data-f')), at = .27 + .62 * f;
+        tl.fromTo(n.querySelector('.ring'), { scale: 0 }, { scale: 1, duration: .05, ease: 'back.out(3)' }, at)
+          .fromTo(n.querySelector('.al'), { opacity: 0, x: n.classList.contains('l') ? 14 : -14 }, { opacity: 1, x: 0, duration: .08, ease: 'power2.out' }, at + .02);
+      });
+      tl.fromTo('.ahint', { opacity: 0 }, { opacity: 1, duration: .05 }, .92);
+    }
+    arcSetup = function () { mode = narrowQ.matches ? 'n' : 'w'; build(); };
+    if (!gsap || reduce) { place(); anodes.forEach(function (n) { n.style.opacity = 1; }); document.querySelectorAll('#aApex,#aEnds').forEach(function (e) { e.style.opacity = 1; }); return; }
+    document.documentElement.classList.add('arcjs');
+    arcSetup();
+    window.addEventListener('resize', function () { var m = narrowQ.matches ? 'n' : 'w'; if (m !== mode) { arcSetup(); } else if (m === 'w') { place(); } });
+  })();
 
   var copy = document.getElementById('copyMail');
   copy.addEventListener('click', function () {
@@ -1009,6 +1040,23 @@ const FORM_URL = "";
       pio.observe(document.querySelector('.cgrid'));
     } else { pen.play(); }
   }
+
+  /* ---------- about: the statement fills in letter by letter (pinned) ---------- */
+  (function () {
+    var el = document.getElementById('astate'); if (!el) { return; }
+    var text = el.getAttribute('data-t'), chars = [];
+    el.setAttribute('aria-label', text); el.textContent = '';
+    text.split(' ').forEach(function (w, wi, arr) {
+      var wsp = document.createElement('span'); wsp.className = 'aw'; wsp.setAttribute('aria-hidden', 'true');
+      w.split('').forEach(function (ch) { var c = document.createElement('span'); c.className = 'ac'; c.textContent = ch; wsp.appendChild(c); chars.push(c); });
+      el.appendChild(wsp); if (wi < arr.length - 1) { el.appendChild(document.createTextNode(' ')); }
+    });
+    if (!gsap || reduce) { el.classList.add('st'); return; }
+    var shadow = '0.6px 0.6px 0 #E91E8C, -0.6px -0.6px 0 #E91E8C, 0.6px -0.6px 0 #E91E8C, -0.6px 0.6px 0 #E91E8C';
+    var tl = gsap.timeline({ scrollTrigger: { trigger: '#apin', start: 'top top', end: function () { return '+=' + Math.round(Math.max(760, window.innerHeight * 1.5)); }, pin: true, scrub: 0.6, anticipatePin: 1, invalidateOnRefresh: true } });
+    chars.forEach(function (c, i) { tl.to(c, { color: '#E91E8C', scale: 1.12, textShadow: shadow, duration: 3.5, ease: 'power1.out' }, i * 0.54); });
+    tl.to({}, { duration: 12 });
+  })();
 
   /* ---------- footer wordmark: letters rise while you scroll ---------- */
   var fwm = document.getElementById('fwm'), fwin = document.getElementById('fwin'), fl = [];
